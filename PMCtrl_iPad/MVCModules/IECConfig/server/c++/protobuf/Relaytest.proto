@@ -1,0 +1,84 @@
+﻿syntax="proto3";
+
+package relaytest;
+
+enum Version
+{
+	version91 = 0;
+	version99 = 1;
+	other = 2;
+}
+enum Unit
+{
+	A = 0;
+	kA = 1;
+	V = 2;
+	kV = 4;
+}
+message ChannelInfo
+{
+	uint32 nIndex = 1;
+	string strName = 2;
+	string nPhase = 3;
+	uint32 nCCbm = 4;//被监视的电路元件
+	Unit nUnit = 5;
+	float fCoefA = 6;
+	float fCoefB = 7;
+	float fSkew = 8;
+	float fTime = 9;
+	float fMin = 10;
+	float fMax = 11;
+	float fPrimary = 12;
+	float fSecondary = 13;
+	string PS = 14;//if ps =P(一次值)ps = s(二次值) 
+};
+
+message Items
+{
+	repeated Item oItems = 1;
+}
+message ComData
+{
+        uint32 tripType = 1;//触发方式	0：手动触发1：时间触发单位ms2：开入变位触发	3：GPS触发
+        uint32 switchLogic = 2;	//开入变逻辑	1：逻辑或	0：逻辑与
+        uint32 validChannel = 3;	//开入变位有效通道	bit9～bit0对应通道10～通道1，置1有效
+        uint32 mDelay = 4;		//时间触发毫秒值
+        uint32 gpsSec = 5;		//GPS触发秒值
+        uint32 gpsnSec = 6;		//GPS触发纳秒值
+        uint32 faultmSec = 7;		//故障态持续时间，单位毫秒。如果正常态数据不循环，则该时间为整个波形数							//据播放时间
+        uint32 ReplayChannel = 8;	//bit5～bit0：电压通道6～1, 	bit13～bit8:电流通道6～1,按bit取，置一有效
+        uint32 ReplayChannel2 = 9;	//通道选择2,保留
+        uint32 freq = 10;			//播放频率
+        uint32 loopFlag = 11;		//故障态结束是否继续发送正常态数据，1：发送	0：不发送
+        uint32 faultStartPoint =12;  //故障开始点数
+        float fre =13;
+        uint32 nSamp =14;//采样速率
+        uint32 nEndSamp = 15;//采样速率下,最终采样数
+        uint32 nIsloop = 16;//是否循环1循环0不循环
+				uint32 nCycleNum = 17;//循环次数
+
+}
+message Item
+{
+
+        ChannelInfo oinfo =1;
+        ChannelData odata = 2;
+        ComData ocomData = 3;
+
+}
+
+message ChannelData
+{
+	repeated float Va =1;
+	repeated float Vb =2;
+	repeated float Vc =3;
+	repeated float Ia =4;
+	repeated float Ib =5;
+	repeated float Ic =6;
+	repeated float Vap =7;
+	repeated float Vbp =8;
+	repeated float Vcp =9;
+	repeated float Iap =10;
+	repeated float Ibp =11;
+	repeated float Icp =12;
+}

@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package hqySettingPackage;
+
+//import "hqyComSetting.proto";
+//import "hqyBinaryInSetting.proto";
+
+message ComSetting
+{
+     string strIP = 1;
+     uint32 nPort = 2;
+}
+
+
+enum SettingType
+{
+    ST_BinarySetting = 0;
+    ST_ComSetting =1;
+}
+
+message Setting
+{
+     SettingType nType = 1;
+     ComSetting oComSetting = 2;
+//    hqyBinaryInPackage.BinaryinSetting oBinaryInSetting = 3;
+}

@@ -1,0 +1,35 @@
+syntax="proto3";
+
+import "hqyGooseCommon.proto";
+package hqyGoose_Pub_Setting;
+
+
+message Control_Block
+{
+      string                     IedName            = 1;
+       string                     gocbRef            = 2;
+      uint32                     timeAllowToLive    = 3;    // 允许生存时间单位毫秒
+      string                     DataSet            = 4;
+      string                     goID               = 5;
+      bool                       ndsCom             = 6;
+      bool                       testFlag           = 7;
+      uint32                     APPID              = 8;
+      string                     SrcMAC             = 9;
+      string                     DestMac            = 10;
+      int32                      VLAN_ID            = 11;
+      int32                      VLAN_Priority      = 12;
+      uint32                     ConfRecv           = 13;
+      int32                      Port               = 14;   // 发送端口号，第一个端口号为0， -1表示不发布
+      bool                       IsOutput           = 15;  //控制块是否选中
+     repeated hqyGooseCommon.Channel_Info  Channel   = 16;
+}
+
+message Goose_Publish
+{
+     repeated Control_Block  Block                   = 1;
+      int32                   EmergencyDeliveryTime   = 2;  // 最短传输时间T1，单位毫秒
+      int32                   FasterDeliveryTime      = 3;  // 快速重传时间
+      int32                   StableDeliveryTime      = 4;  // 稳定条件下重传时间T0，单位毫秒
+      int32                   TimeQualityFlag         = 5;  // 时间品质，缺省值0x0A
+      int32                   PackageTimeInterval     = 6;  // 其他组发送GOOSE时相对于第一组发送时的时延,单位毫秒
+}

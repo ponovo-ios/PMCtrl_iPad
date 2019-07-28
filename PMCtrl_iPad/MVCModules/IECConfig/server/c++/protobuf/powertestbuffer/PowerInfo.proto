@@ -1,0 +1,43 @@
+syntax="proto3";
+
+import "VectSetting.proto";
+
+package PowerInfo;
+
+message Channel
+{
+    VectSetting.ChannelBase   BaseInfo        = 1;
+    double                    Amplitude       = 2;     // 幅值
+    double                    Frequency       = 3;     // 频率
+    double                    Angle           = 4;     // 角度
+}
+
+enum PowerType
+{
+    PT_PW_FACTOR   = 0;    // 功率因数
+    PT_PW_REAL     = 1;    // 有功
+    PT_PW_IMAGE    = 2;    // 无功
+    PT_PW_TOTAL    = 3;    // 视在功率
+}
+
+message PowerItem
+{
+    PowerType Type     = 1;
+    double    PhaseA   = 2;
+    double    PhaseB   = 3;
+    double    PhaseC   = 4;
+    double    PhaseSum = 5;
+}
+
+message Vect
+{
+    string             Name      = 1;   
+    string             Display   = 2;    
+    repeated Channel   Channels  = 3;
+    repeated PowerItem VectPower = 4;
+}
+
+message Power
+{
+    repeated Vect Powers = 1;
+}

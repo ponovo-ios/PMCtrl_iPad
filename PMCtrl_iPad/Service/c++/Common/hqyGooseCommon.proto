@@ -1,0 +1,55 @@
+syntax = "proto3";
+package hqyGooseCommon;
+
+enum DataType
+{
+   T_BOOL          = 0;
+   T_SPS           = 1;
+   T_DPS           = 2;
+   T_BIT_STRING    = 3;
+   T_UTC_TIME      = 4;
+   T_QUALITY       = 5;
+   T_FLOAT32       = 6;
+   T_FLOAT64       = 7;
+   T_INT8          = 8;
+   T_INT16         = 9;
+   T_INT32         = 10;
+   T_UINT8         = 11;
+   T_UINT16        = 12;
+   T_UINT32        = 13;
+   T_STRUCT        = 14;
+   T_STRING        = 15;
+}
+
+message UtcTime
+{
+     int32 year        = 1;
+     int32 month       = 2;
+     int32 day         = 3;
+     int32 hour        = 4;
+     int32 minute      = 5;
+     int32 second      = 6;
+     int32 millisecond = 7;
+}
+
+message DataAtom
+{
+     DataType type           = 1;
+     string   Name           = 2;
+     string   MapChannel     = 3;    // 映射到的通道或者变量名
+     int32    bits           = 4;    // 仅当type == BIT_STRING时，本字段指明位串的长度，对于其他类型，本子段无效
+     uint32   vUInt          = 5;    // BOOL,SPS,DPS,BIT_STRING,QUALITY,UINT8,UINT16,UINT32
+     int32    vInt           = 6;    // INT8,INT16,INT32
+     float    vFloat         = 7;    // FLOAT32
+     double   vDouble        = 8;    // FLOAT64
+     UtcTime  vTime          = 9;    // UTC_TIME
+     string   vString        = 10;   // STRING
+     repeated DataAtom vStru = 11;
+}
+
+message Channel_Info
+{
+      string   Name           = 1;
+      DataAtom              Data           = 2;
+}
+

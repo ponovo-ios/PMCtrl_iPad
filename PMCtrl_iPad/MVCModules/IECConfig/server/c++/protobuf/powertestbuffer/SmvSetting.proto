@@ -1,0 +1,24 @@
+syntax="proto3";
+
+package SmvSetting;
+
+message SmvItem
+{
+    string Name         = 1;
+    double SettingValue = 2;   // 整定值
+    double MeasureValue = 3;   // 测量值
+    double deviation    = 4;   // 误差
+    string evaluation   = 5;   // 评价
+}
+
+message SmvResultInfo
+{
+    repeated SmvItem Item = 1; 
+}
+
+
+
+
+                                                            
+
+

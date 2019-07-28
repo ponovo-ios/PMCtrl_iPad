@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BD_IEDInfoView">
+            <rect key="frame" x="0.0" y="0.0" width="677" height="435"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="svX-Xk-qfE">
+                    <rect key="frame" x="1" y="1" width="675" height="1"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="ckT-1E-PXc"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FR4-ZS-5Ss">
+                    <rect key="frame" x="0.0" y="2" width="677" height="40"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v9N-Ov-ku4">
+                            <rect key="frame" x="10" y="5" width="83" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <state key="normal" title="GOOSE发送">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.13768935831965479" green="0.113622633919433" blue="0.97290688753128052" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="gooseSendAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="Zds-iv-JOJ"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pWb-eZ-WWO">
+                            <rect key="frame" x="103" y="5" width="63" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <state key="normal" title="SMV发送">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.13768935830000001" green="0.11362263390000001" blue="0.97290688749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="smvSendAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="6eD-KX-BdK"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BEE-dj-FB6">
+                            <rect key="frame" x="269" y="5" width="63" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <state key="normal" title="SMV接收">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.13768935830000001" green="0.11362263390000001" blue="0.97290688749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="smvSubAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="IPG-8K-feg"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vkD-RY-DFf">
+                            <rect key="frame" x="342" y="5" width="46" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <state key="normal" title="示意图">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.13768935830000001" green="0.11362263390000001" blue="0.97290688749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="schematicAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="SlR-OS-Qq7"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nBT-SD-Xq3">
+                            <rect key="frame" x="176" y="5" width="83" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <state key="normal" title="GOOSE接收">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.13768935830000001" green="0.11362263390000001" blue="0.97290688749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="gooseSubAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="GqW-BI-ySO"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Po1-aP-JhM">
+                            <rect key="frame" x="26.5" y="37" width="50" height="1"/>
+                            <color key="backgroundColor" red="0.13768935830000001" green="0.11362263390000001" blue="0.97290688749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="TGp-Q4-PGv"/>
+                                <constraint firstAttribute="width" constant="50" id="xFm-9Q-hLW"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="vkD-RY-DFf" firstAttribute="leading" secondItem="BEE-dj-FB6" secondAttribute="trailing" constant="10" id="0AG-V3-rLo"/>
+                        <constraint firstItem="pWb-eZ-WWO" firstAttribute="centerY" secondItem="v9N-Ov-ku4" secondAttribute="centerY" id="1IZ-lq-X1X"/>
+                        <constraint firstAttribute="height" constant="40" id="5FE-ao-e2R"/>
+                        <constraint firstItem="pWb-eZ-WWO" firstAttribute="leading" secondItem="v9N-Ov-ku4" secondAttribute="trailing" constant="10" id="Cm3-IV-v5M"/>
+                        <constraint firstItem="BEE-dj-FB6" firstAttribute="centerY" secondItem="nBT-SD-Xq3" secondAttribute="centerY" id="DEW-8f-xjO"/>
+                        <constraint firstItem="v9N-Ov-ku4" firstAttribute="centerY" secondItem="FR4-ZS-5Ss" secondAttribute="centerY" id="DIe-KP-Bwi"/>
+                        <constraint firstItem="BEE-dj-FB6" firstAttribute="leading" secondItem="nBT-SD-Xq3" secondAttribute="trailing" constant="10" id="O9H-Zg-6mA"/>
+                        <constraint firstItem="Po1-aP-JhM" firstAttribute="centerX" secondItem="v9N-Ov-ku4" secondAttribute="centerX" id="RKg-aL-O5s"/>
+                        <constraint firstItem="nBT-SD-Xq3" firstAttribute="leading" secondItem="pWb-eZ-WWO" secondAttribute="trailing" constant="10" id="Zvu-gB-QAq"/>
+                        <constraint firstItem="v9N-Ov-ku4" firstAttribute="leading" secondItem="FR4-ZS-5Ss" secondAttribute="leading" constant="10" id="dm3-Pe-m9Q"/>
+                        <constraint firstAttribute="bottom" secondItem="Po1-aP-JhM" secondAttribute="bottom" constant="2" id="hAI-UX-DFW"/>
+                        <constraint firstItem="nBT-SD-Xq3" firstAttribute="centerY" secondItem="pWb-eZ-WWO" secondAttribute="centerY" id="vZN-cz-FOY"/>
+                        <constraint firstItem="vkD-RY-DFf" firstAttribute="centerY" secondItem="BEE-dj-FB6" secondAttribute="centerY" id="zGj-ma-Il9"/>
+                    </constraints>
+                </view>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VgV-1e-Z9i">
+                    <rect key="frame" x="0.0" y="42" width="677" height="393"/>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="svX-Xk-qfE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="1" id="Bvg-OU-tj5"/>
+                <constraint firstItem="FR4-ZS-5Ss" firstAttribute="top" secondItem="svX-Xk-qfE" secondAttribute="bottom" id="K6H-MV-5Dl"/>
+                <constraint firstItem="svX-Xk-qfE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="1" id="MX0-4X-AfZ"/>
+                <constraint firstAttribute="bottom" secondItem="VgV-1e-Z9i" secondAttribute="bottom" id="Pdm-BY-X8t"/>
+                <constraint firstItem="VgV-1e-Z9i" firstAttribute="top" secondItem="FR4-ZS-5Ss" secondAttribute="bottom" id="TqR-eV-gGM"/>
+                <constraint firstAttribute="trailing" secondItem="VgV-1e-Z9i" secondAttribute="trailing" id="YAJ-69-G6h"/>
+                <constraint firstAttribute="trailing" secondItem="FR4-ZS-5Ss" secondAttribute="trailing" id="aLh-hg-9VB"/>
+                <constraint firstItem="FR4-ZS-5Ss" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ifu-50-Cgw"/>
+                <constraint firstItem="VgV-1e-Z9i" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="taA-Xq-TJx"/>
+                <constraint firstAttribute="trailing" secondItem="svX-Xk-qfE" secondAttribute="trailing" constant="1" id="tuL-dc-WOe"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="gooseSendBtn" destination="v9N-Ov-ku4" id="fSl-em-w5z"/>
+                <outlet property="gooseSubBtn" destination="nBT-SD-Xq3" id="kvz-DE-JUP"/>
+                <outlet property="markViewCenterlayout" destination="RKg-aL-O5s" id="zUu-QD-0Oh"/>
+                <outlet property="schematicBtn" destination="vkD-RY-DFf" id="ufo-Pj-dwH"/>
+                <outlet property="scrollView" destination="VgV-1e-Z9i" id="IK8-p1-lkQ"/>
+                <outlet property="selectedMarkView" destination="Po1-aP-JhM" id="AAs-jS-4pa"/>
+                <outlet property="smvSendBtn" destination="pWb-eZ-WWO" id="BoE-Rf-08d"/>
+                <outlet property="smvSubBtn" destination="BEE-dj-FB6" id="gzv-9l-pd7"/>
+            </connections>
+            <point key="canvasLocation" x="15.5" y="-77.5"/>
+        </view>
+    </objects>
+</document>

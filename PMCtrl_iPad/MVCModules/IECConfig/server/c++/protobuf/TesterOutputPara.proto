@@ -1,0 +1,20 @@
+syntax="proto3";
+
+package TesterOutputPara;
+
+message ChanelPara
+{
+   float famptitude = 1;
+   float fphase = 2;
+   float ffre = 3;
+}
+message ChanelMode
+{
+  repeated ChanelPara oCurChanel = 1;
+  repeated ChanelPara oVolChanel = 2;
+  
+}
+message AC6U6I
+{
+   ChanelMode oChanel = 1;
+}

@@ -1,0 +1,55 @@
+
+package Goose_Common;
+
+enum DataType
+{
+   T_BOOL          = 0;
+   T_SPS           = 1;
+   T_DPS           = 2;
+   T_BIT_STRING    = 3;
+   T_UTC_TIME      = 4;
+   T_QUALITY       = 5;
+   T_FLOAT32       = 6;
+   T_FLOAT64       = 7;
+   T_INT8          = 8;
+   T_INT16         = 9;
+   T_INT32         = 10;
+   T_UINT8         = 11;
+   T_UINT16        = 12;
+   T_UINT32        = 13;
+   T_STRUCT        = 14;
+   T_STRING        = 15;
+}
+
+message UtcTime
+{
+    optional int32 year        = 1;
+    optional int32 month       = 2;
+    optional int32 day         = 3;
+    optional int32 hour        = 4;
+    optional int32 minute      = 5;
+    optional int32 second      = 6;
+    optional int32 millisecond = 7;
+}
+
+message DataAtom
+{
+    optional DataType type           = 1;
+    optional string   Name           = 2;
+    optional string   MapChannel     = 3;    // 映射到的通道或者变量名
+    optional int32    bits           = 4;    // 仅当type == BIT_STRING时，本字段指明位串的长度，对于其他类型，本子段无效
+    optional uint32   vUInt          = 5;    // BOOL,SPS,DPS,BIT_STRING,QUALITY,UINT8,UINT16,UINT32
+    optional int32    vInt           = 6;    // INT8,INT16,INT32
+    optional float    vFloat         = 7;    // FLOAT32
+    optional double   vDouble        = 8;    // FLOAT64
+    optional UtcTime  vTime          = 9;    // UTC_TIME
+    optional string   vString        = 10;    // STRING
+    repeated DataAtom vStru = 11;
+}
+
+message Channel_Info
+{
+     optional string   Name           = 1;
+     optional DataAtom              Data           = 2;
+}
+

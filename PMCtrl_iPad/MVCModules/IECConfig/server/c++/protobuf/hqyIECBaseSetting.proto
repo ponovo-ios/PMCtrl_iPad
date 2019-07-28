@@ -1,0 +1,32 @@
+syntax="proto3";
+package hqyIECBaseSetting;
+
+enum BCodeType
+{
+	bcodetype_Positive = 0;
+	bcodetype_negtive = 1;
+	bcodetype_1588 = 2;
+}
+
+message BaseSetting
+{
+         float fFreN = 1;
+	 float fUn = 2;
+	 float fIn = 3;
+	 BCodeType bcodetype = 4;
+	repeated Ratio oratio = 5;
+
+     bool bSendzero = 6;
+
+
+}
+
+message Ratio
+{
+     uint32 nprimaryvolte = 1;//一次
+     uint32 nsecondaryvolte = 2;
+     uint32 nprimarycurrent =3;
+     uint32 nsecondarycurrent = 4;
+}
+
+

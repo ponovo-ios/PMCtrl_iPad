@@ -1,0 +1,22 @@
+syntax="proto3";
+import "hqyGooseCommon.proto";
+import "hqyPUDPara.proto";
+
+package hqyManualResult;
+
+
+message Item
+{
+     uint32 nindex = 1;
+     hqyGooseCommon.UtcTime time = 2;   // 时间
+     uint32 oactivetype = 3;   // 类型
+     hqyPudPara.acpara oacrestate = 4;
+     hqyPudPara.acpara oacctivestate = 5;
+     uint32 nBinstate = 6;//开入量
+     uint32 nBinAllState = 7;//开入量所有状态值
+}
+
+message ResultInfo
+{
+    repeated Item oitem = 1; 
+}

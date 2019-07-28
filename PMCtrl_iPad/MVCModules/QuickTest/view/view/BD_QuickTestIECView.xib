@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="BD_QuickTestIECViewID" id="iN0-l3-epB" customClass="BD_QuickTestIECView">
+            <rect key="frame" x="0.0" y="0.0" width="620" height="382"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5mj-Y5-cfW">
+                    <rect key="frame" x="10" y="15" width="190" height="352"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-sX-RYE">
+                            <rect key="frame" x="30.5" y="45" width="130" height="33"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="130" id="bBO-0B-dgw"/>
+                            </constraints>
+                            <state key="normal" image="paramsetting"/>
+                            <connections>
+                                <action selector="setParam:" destination="iN0-l3-epB" eventType="touchUpInside" id="PmL-Rh-hC0"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Fd-fl-LUT">
+                            <rect key="frame" x="30.5" y="108" width="130" height="33"/>
+                            <state key="normal" image="smvSend"/>
+                            <connections>
+                                <action selector="sendSMV:" destination="iN0-l3-epB" eventType="touchUpInside" id="c3b-Kb-YFe"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NRx-sr-U0c">
+                            <rect key="frame" x="30.5" y="171" width="130" height="33"/>
+                            <state key="normal" image="gooseSend"/>
+                            <connections>
+                                <action selector="sendGoose:" destination="iN0-l3-epB" eventType="touchUpInside" id="9M3-qD-9O9"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d5u-xX-2vE">
+                            <rect key="frame" x="30.5" y="234" width="130" height="33"/>
+                            <state key="normal" title="Button" image="gooseBook"/>
+                            <connections>
+                                <action selector="bookGoose:" destination="iN0-l3-epB" eventType="touchUpInside" id="jcT-kb-3At"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="d5u-xX-2vE" firstAttribute="width" secondItem="NRx-sr-U0c" secondAttribute="width" id="0xs-f7-XsN"/>
+                        <constraint firstItem="5Fd-fl-LUT" firstAttribute="centerX" secondItem="5mj-Y5-cfW" secondAttribute="centerX" id="4UM-CT-Fds"/>
+                        <constraint firstAttribute="width" constant="190" id="4sy-wm-lFX"/>
+                        <constraint firstItem="NRx-sr-U0c" firstAttribute="centerX" secondItem="5mj-Y5-cfW" secondAttribute="centerX" id="LW0-34-Fgt"/>
+                        <constraint firstItem="5Fd-fl-LUT" firstAttribute="width" secondItem="ceK-sX-RYE" secondAttribute="width" id="MoI-kJ-sDs"/>
+                        <constraint firstItem="5Fd-fl-LUT" firstAttribute="top" secondItem="ceK-sX-RYE" secondAttribute="bottom" constant="30" id="OBD-nq-p6x"/>
+                        <constraint firstItem="ceK-sX-RYE" firstAttribute="top" secondItem="5mj-Y5-cfW" secondAttribute="top" constant="45" id="ONv-Jd-gvl"/>
+                        <constraint firstItem="NRx-sr-U0c" firstAttribute="top" secondItem="5Fd-fl-LUT" secondAttribute="bottom" constant="30" id="Ub0-26-gjW"/>
+                        <constraint firstItem="d5u-xX-2vE" firstAttribute="centerX" secondItem="5mj-Y5-cfW" secondAttribute="centerX" id="Y4W-R1-liZ"/>
+                        <constraint firstItem="ceK-sX-RYE" firstAttribute="centerX" secondItem="5mj-Y5-cfW" secondAttribute="centerX" id="cVe-78-T59"/>
+                        <constraint firstItem="NRx-sr-U0c" firstAttribute="width" secondItem="5Fd-fl-LUT" secondAttribute="width" id="hfk-Yu-EeO"/>
+                        <constraint firstItem="d5u-xX-2vE" firstAttribute="top" secondItem="NRx-sr-U0c" secondAttribute="bottom" constant="30" id="hzX-fR-bQg"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mm8-Vb-xCj">
+                    <rect key="frame" x="220" y="15" width="390" height="352"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B6K-7n-Frb">
+                            <rect key="frame" x="0.0" y="0.0" width="390" height="352"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="B6K-7n-Frb" firstAttribute="leading" secondItem="mm8-Vb-xCj" secondAttribute="leading" id="dwB-7c-BUl"/>
+                        <constraint firstItem="B6K-7n-Frb" firstAttribute="top" secondItem="mm8-Vb-xCj" secondAttribute="top" id="g6B-VM-gHB"/>
+                        <constraint firstAttribute="bottom" secondItem="B6K-7n-Frb" secondAttribute="bottom" id="gD0-RY-qJK"/>
+                        <constraint firstAttribute="trailing" secondItem="B6K-7n-Frb" secondAttribute="trailing" id="vyg-cC-LvW"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="mm8-Vb-xCj" secondAttribute="bottom" constant="15" id="3Di-gY-HP5"/>
+                <constraint firstItem="mm8-Vb-xCj" firstAttribute="leading" secondItem="5mj-Y5-cfW" secondAttribute="trailing" constant="20" id="Fue-KV-08P"/>
+                <constraint firstAttribute="bottom" secondItem="5mj-Y5-cfW" secondAttribute="bottom" constant="15" id="K2Z-Ea-3cv"/>
+                <constraint firstItem="5mj-Y5-cfW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="MPo-fa-fPF"/>
+                <constraint firstItem="5mj-Y5-cfW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="ZgL-9H-BRy"/>
+                <constraint firstAttribute="trailing" secondItem="mm8-Vb-xCj" secondAttribute="trailing" constant="10" id="kZf-FU-Faf"/>
+                <constraint firstItem="mm8-Vb-xCj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="p74-eK-9eu"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="GooseBookBtn" destination="d5u-xX-2vE" id="v68-Zd-pGS"/>
+                <outlet property="GooseSendBtn" destination="NRx-sr-U0c" id="zn2-fA-1oq"/>
+                <outlet property="SMVBtn" destination="5Fd-fl-LUT" id="VBs-R6-HAO"/>
+                <outlet property="btncontentView" destination="5mj-Y5-cfW" id="cpN-DJ-Td7"/>
+                <outlet property="paramContentView" destination="mm8-Vb-xCj" id="IzF-Qo-wQi"/>
+                <outlet property="paramSetBtn" destination="ceK-sX-RYE" id="SGd-DG-rao"/>
+                <outlet property="tableView" destination="B6K-7n-Frb" id="h2n-XQ-XRC"/>
+            </connections>
+            <point key="canvasLocation" x="3" y="-120"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="gooseBook" width="129" height="33"/>
+        <image name="gooseSend" width="129" height="33"/>
+        <image name="paramsetting" width="129" height="33"/>
+        <image name="smvSend" width="129" height="33"/>
+    </resources>
+</document>

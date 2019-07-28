@@ -1,0 +1,80 @@
+syntax="proto3";
+
+package ShortcutCalcSetting;
+
+enum FaultType                  // 故障类型 
+{
+   PHASE_A_GROUNDING       = 0;    // A相接地
+   PHASE_B_GROUNDING       = 1;    // B相接地
+   PHASE_C_GROUNDING       = 2;    // C相接地
+   PHASE_AB_SHORT_CIRCUIT  = 3;    // AB短路
+   PHASE_BC_SHORT_CIRCUIT  = 4;    // BC短路
+   PHASE_CA_SHORT_CIRCUIT  = 5;    // CA短路
+   PHASE_AB_GROUND_SHORT   = 6;    // AB接地短路
+   PHASE_BC_GROUND_SHORT   = 7;    // BC接地短路
+   PHASE_CA_GROUND_SHORT   = 8;    // CA接地短路
+   PHASE_ABC_SHORT_CIRCUIT = 9;    // ABC三相短路
+   SINGLE_PHASE_FAULT      = 10;   // 单相系统
+}
+
+enum ImpedanceMode    // 阻抗参数形式
+{
+    Z_PHI_MODE = 0;   // Z, Phi 形式
+    R_X_MODE   = 1;   // R, X 形式
+}
+
+message ValuePair
+{
+    double VarA  = 1;
+    double VarB  = 2;
+}
+
+message ImpedanceInfo
+{
+    ImpedanceMode mode = 1;      // 阻抗参数形式
+    ValuePair Z_Phi    = 2;      // Z, Phi 形式
+    ValuePair R_X      = 3;      // R, X 形式
+
+}
+
+enum ShortcutComputationalModel
+{
+    KEEP_CURRENT_CONST     = 0;
+    KEEP_VOLTAGE_CONST     = 1;
+    KEEP_IMPEDANCE_CONST   = 2;
+}
+
+message ShortcutComputationalInfo
+{
+    ShortcutComputationalModel mode = 1;      // 计算模型类型
+    double Current                  = 2;      // 保持不变的电流值
+    double Voltage                  = 3;      // 保持不变的电压值
+    double Impedance                = 4;      // 保持不变的|ZS/ZL|值
+}
+
+enum ZeroSeqCompensateCoefMode    // 零序补偿系数的计算方法
+{
+    ZERO_SEQ_COMP_KL    = 0;      // KL
+    ZERO_SEQ_COMP_KR_KX = 1;      // Kr,Kx
+    ZERO_SEQ_COMP_Z0_Z1 = 2;      // Z0,Z1
+}
+
+message ZeroSeqCompensateCoefInfo
+{
+    ZeroSeqCompensateCoefMode mode  = 1;      // 计算模型类型
+    ValuePair KL                    = 2;      // KL
+    ValuePair Kr_Kx                 = 3;      // Kr,Kx
+    ValuePair Z0_Z1                 = 4;      // Z0,Z1
+}
+
+message ShortcutCalcInfo
+{
+    FaultType                  Mode                  = 1;  
+    ImpedanceInfo              Impedance             = 2;  
+    ShortcutComputationalInfo  ShortcutCompute       = 3;  
+    ZeroSeqCompensateCoefInfo  ZeroSeqCompensateCoef = 4;  
+    double                     LoadCurrent           = 5;  // 负荷电流
+    double                     LoadAngle             = 6;  // 负荷功角
+} 
+
+

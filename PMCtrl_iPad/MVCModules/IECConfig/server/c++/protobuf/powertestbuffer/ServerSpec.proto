@@ -1,0 +1,75 @@
+syntax="proto3";
+
+package ServerSpec;
+
+message cmdRequest 
+{
+  int32  UserId = 1;
+  string cmd    = 2;
+}
+
+message ConnectRequest 
+{
+  int32  Port = 1;
+}
+
+message ProductRequest
+{
+  int32  UserId  = 1;
+  string Product = 2;
+}
+
+message PrepareRequest 
+{
+  int32  UserId       = 1;
+  string TestCaseName = 2;
+}
+
+message DataRequest 
+{
+  int32  UserId  = 1;
+  string catalog = 2;
+  string param   = 3;
+}
+
+message ExtendRequest
+{
+  string Request = 1;
+  string param   = 2;
+}
+
+message ExtendResponse 
+{
+  int32 ResultCode = 1;
+  string Result    = 2;
+}
+
+message ConnectResponse 
+{
+  int32 ResultCode = 1;
+  int32 UserId = 2;
+}
+
+message Int32Response 
+{
+  int32 ResultCode = 1;
+}
+
+message ResultResponse
+{
+  int32  ResultCode = 1;
+  string param = 2;
+}
+
+service ServerHost 
+{
+  rpc ExtendCommand(ExtendRequest) returns ( ExtendResponse );
+  rpc Connect(ConnectRequest )    returns ( ConnectResponse );
+  rpc Execute(cmdRequest)         returns ( Int32Response  );
+  rpc SetProduct(ProductRequest)  returns ( Int32Response  );
+  rpc Prepare(PrepareRequest)     returns ( Int32Response  );
+  rpc SetSetting(DataRequest)     returns ( Int32Response  );
+  rpc SetValue(DataRequest)       returns ( Int32Response  );
+  rpc GetValue(DataRequest)       returns ( ResultResponse );
+}
+

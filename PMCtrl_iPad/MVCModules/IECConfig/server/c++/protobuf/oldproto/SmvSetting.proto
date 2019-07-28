@@ -1,0 +1,23 @@
+
+package SmvSetting;
+
+message SmvItem
+{
+    optional string Name         = 1;
+    optional double SettingValue = 2;   // 整定值
+    optional double MeasureValue = 3;   // 测量值
+    optional double deviation    = 4;   // 误差
+    optional string evaluation   = 5;   // 评价
+}
+
+message SmvResultInfo
+{
+    repeated SmvItem Item = 1; 
+}
+
+
+
+
+                                                            
+
+

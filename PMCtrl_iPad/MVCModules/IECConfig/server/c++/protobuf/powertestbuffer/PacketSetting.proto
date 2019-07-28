@@ -1,0 +1,49 @@
+syntax="proto3";
+
+package PacketSetting;
+
+import "Iec6185092.proto";
+import "Iec6185091.proto";
+import "Iec60044.proto";
+import "Collector.proto";
+import "WeakSignal.proto";
+import "GoosePublish.proto";
+import "GooseSubscribe.proto";
+
+
+enum PacketType
+{
+    IEC61850_9_2       = 0;  //应该从0开始?
+    IEC61850_9_2_LE    = 1;
+    IEC61850_9_1       = 2;
+    IEC60044_8         = 3;  //IEC60044-8 
+    COLLECTOR          = 4;  //采集器输出 
+    WEAK_SIGNALS       = 5;
+    GOOSE_PUB          = 6;
+    GOOSE_SUB          = 7;
+}
+
+
+message PacketItem
+{
+    PacketType                           Type                 = 1;
+    bool                                 IsOutput             = 2;
+    IEC61850_9_2_Setting.IEC61850_9_2    Iec92                = 3;
+    IEC61850_9_2_Setting.IEC61850_9_2LE  Iec92LE              = 4;
+    IEC61850_9_1_Setting.IEC61850_9_1    Iec91                = 5;
+    IEC60044_Setting.IEC60044            IecFT3               = 6;
+    Collector_Setting.Collector          Collect              = 7;
+    Weak_Signal_setting.Weak_Signal      WeakSignal           = 8;
+    Goose_Sub_Setting.Goose_Sub          GooseSub             = 9;
+    Goose_Pub_Setting.Goose_Publish      GoosePub             = 10;
+} 
+
+message PacketsInfo
+{
+    repeated PacketItem packet    = 1;
+}
+
+
+
+
+

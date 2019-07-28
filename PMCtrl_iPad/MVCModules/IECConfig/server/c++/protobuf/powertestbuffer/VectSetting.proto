@@ -1,0 +1,108 @@
+syntax="proto3";
+
+package VectSetting;
+
+
+enum PhaseType
+{
+    PHT_UNKNOWN      = 0;
+    PHT_A            = 1;  // A相
+    PHT_B            = 2;  // B相
+    PHT_C            = 3;  // C相
+    PHT_N            = 4;  // N相
+    PHT_AB           = 5;  // AB线
+    PHT_BC           = 6;  // BC线
+    PHT_AC           = 7;  // AC线
+    PHT_ZERO_SEQ     = 8;  // 三相零序分量
+    PHT_POSITIVE_SEQ = 9;  // 三相正序分量
+    PHT_NEGATIVE_SEQ = 10; // 三相负序分量
+}
+
+enum SignalType
+{
+   S_VOLTAGE         = 0;
+   S_CURRENT         = 1;
+   S_UNKNOWN         = 2;
+}
+
+enum OutputType
+{
+   OUT_ANALOG        = 0;   // 模拟输出
+   OUT_DIGITAL       = 1;   // 数字输出
+   OUT_BOTH          = 2;   // 数字模拟同时输出
+}
+
+message HarmonicItem
+{
+    int32   Index       = 1;    // 谐波次数， 0次为直流分量，1次为基波分量
+    double  Amplitude   = 2;    // 谐波幅值
+    double  Angle       = 3;    // 谐波相位
+}
+
+message HarmDisplayItem
+{
+    int32   Index       = 1;    // 谐波次数， 0次为直流分量，1次为基波分量
+    bool    Visible     = 2;    // 该次谐波是否显示
+}
+
+message HarmDisplayInfo
+{
+    repeated HarmDisplayItem Item = 1;
+}
+
+message HarmonicInfo
+{
+    double   BaseFrequency     = 1;
+    repeated HarmonicItem Item = 2;
+}
+
+message keyValue
+{
+    string  key   = 1;
+    double  val   = 2; 
+}
+
+message ExtendInfo
+{
+    double              tag        = 1;
+    repeated int32      Integers   = 2;
+    repeated double     Floats     = 3;
+    repeated keyValue   Maps       = 4;
+}
+
+message ChannelBase
+{
+    string        VectName        = 1;
+    string        Name            = 2;
+    string        Display         = 3;     // 用于多语言的显示
+    PhaseType     Phase           = 4;     // 相位或者相序
+    SignalType    Type            = 5;
+    int32         Num             = 6; 
+    bool          IsAC            = 7;
+    OutputType    OutType         = 8;
+}
+
+message ChannelList
+{
+    repeated ChannelBase item = 1;    // 自动递变或者手动递变的通道列表
+}
+
+message EvalItem
+{
+    string  RefVarName           = 1;
+    string  Display              = 2;
+    double  SettingV             = 3;
+    bool    IsAbsoluteError      = 4;
+    double  AbsoluteError        = 5;
+    bool    IsRelativeError      = 6;
+    double  RelativeError        = 7;
+    double  MeasureV             = 8;
+    string  EvalString           = 9;
+    bool    IsSysVar             = 10;
+}
+
+message EvalInfo
+{
+    repeated EvalItem BinaryItem       = 1;   // 所有开光量评估条件
+    repeated EvalItem ActionItem       = 2;   // 所有整定值评估条件
+}

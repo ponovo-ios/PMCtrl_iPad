@@ -1,0 +1,20 @@
+﻿syntax="proto3";
+
+package structdata;
+
+message channelpara
+{
+	 float famptitude = 1;//幅值
+	 float fphase = 2;//相位
+	 float ffre = 3;//频率
+}
+
+message channels
+{
+	 repeated channelpara channelvalue = 1;
+         uint32 nCount = 2;  //map 编码
+}
+message data
+{
+        repeated channels channel = 1;
+}

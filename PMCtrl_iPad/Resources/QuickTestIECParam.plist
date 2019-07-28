@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>PT1</key>
+		<string>220.000</string>
+		<key>PT2</key>
+		<string>100.000</string>
+		<key>CT1</key>
+		<string>1000.000</string>
+		<key>CT2</key>
+		<string>1.000</string>
+	</dict>
+	<dict>
+		<key>PT1</key>
+		<string>110.000</string>
+		<key>PT2</key>
+		<string>100.000</string>
+		<key>CT1</key>
+		<string>500.000</string>
+		<key>CT2</key>
+		<string>1.000</string>
+	</dict>
+	<dict>
+		<key>PT1</key>
+		<string>110.000</string>
+		<key>PT2</key>
+		<string>100.000</string>
+		<key>CT1</key>
+		<string>500.000</string>
+		<key>CT2</key>
+		<string>5.000</string>
+	</dict>
+	<dict>
+		<key>PT1</key>
+		<string>110.000</string>
+		<key>PT2</key>
+		<string>100.000</string>
+		<key>CT1</key>
+		<string>500.000</string>
+		<key>CT2</key>
+		<string>5.000</string>
+	</dict>
+</array>
+</plist>

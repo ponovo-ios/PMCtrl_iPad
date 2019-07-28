@@ -1,0 +1,34 @@
+syntax="proto3";
+
+package ReportDefine;
+
+message TreeN
+{
+    string   display          = 1;
+    string   Name             = 2;
+    bool     check            = 3;
+    repeated TreeN nodes      = 4;     
+}
+
+message KeyValue
+{
+    string display = 1;
+    string name    = 2;
+    string value   = 3;
+}
+
+message Section
+{
+    string   display        = 1;
+    string   name           = 2;
+    repeated KeyValue Nodes = 3;     
+}
+
+
+message ReportStruct
+{
+    repeated TreeN    tree  = 1; 
+    repeated Section  sect  = 2; 
+}
+
+

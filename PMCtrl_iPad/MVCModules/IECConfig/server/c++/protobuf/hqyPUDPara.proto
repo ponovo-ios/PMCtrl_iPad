@@ -1,0 +1,55 @@
+﻿syntax="proto3";
+
+package hqyPudPara;
+
+message acpara
+{
+	 acanalogpara oacanlogpara = 1;
+	 acdigitalpara oacdigitalpara = 2;
+         uint32 nbinaryout = 3;
+
+}
+
+//电压通道映射
+message state
+{
+	 uint32 nIndex = 1;
+	 acpara oacpara = 2;
+         uint32 nTrigerType = 3;//0: 手动触发 1:时间触发单位ms 2:开入变位触发 3:GPS触发 4:开关量或时间触发
+	 uint32 nTrigerLogic = 4;//1：逻辑或   0：逻辑与
+	 uint32 nTirgerTime = 5;//时间触发参数或 GPS触发秒数
+	 uint32 sGpstime = 6;
+	 uint32 nsGpsTime = 7;//GPS时间 hour:minute:second.ns;
+	 uint32 nBiValide = 8;//开入有效位
+}
+
+message states
+{
+
+    repeated state ostates = 1;
+    uint32 nisloop = 2;//is loops
+}
+
+//   activetype_start = 1;//开始测试
+//   activetype_stop = 2;//停止
+//   activetype_stateChange开始 = 3;
+//   activetype_bichanged = 4;//开入变位
+//   activetype_GOOSEInChanged = 5;//GOOGSE变位
+
+
+message StateResultItem
+{
+     uint32 nindex = 1;
+     uint32 secondtime = 2;   // 时间
+     uint32 nstime = 3;   // 时间
+     uint32 oactivetype = 4;   // 类型
+     uint32 nBinstate = 5;//开入量
+     uint32 ncurrentstateIndex = 6;//当前状态序号，从0开始
+}
+
+message stateResult
+{
+    repeated StateResultItem oitem = 1;
+}
+
+

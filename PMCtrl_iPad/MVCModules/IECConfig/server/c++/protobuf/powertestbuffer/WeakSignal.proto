@@ -1,0 +1,37 @@
+syntax="proto3";
+
+import "VectSetting.proto";
+
+package Weak_Signal_setting;
+
+message ScaleItem
+{
+     string Name              = 1;
+     double PrimaryVolt       = 2;
+     double SecondaryVolt     = 3;
+     double PrimaryCurrent    = 4;
+     double SecondaryCurrent  = 5;
+}
+
+
+message Weak_Signal
+{
+    int32              ChannelCount        = 1;
+    repeated ScaleItem Scale               = 2; 
+    repeated string    MapChannel          = 3;
+    bool               OutputIsPrimary     = 4;
+    VectSetting.ChannelList MapChannelList = 5;
+}
+
+message Weak_signal_Field
+{
+    bool             IsWeakOut       = 1;
+    int32            ChannelCount    = 2;
+    ScaleItem        Scale           = 3; 
+    repeated string  MapChannel      = 4;
+    bool             OutputIsPrimary = 5;
+}
+
+
+
+

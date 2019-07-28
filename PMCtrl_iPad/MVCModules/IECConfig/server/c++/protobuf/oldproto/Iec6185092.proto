@@ -1,0 +1,81 @@
+
+
+package IEC61850_9_2_Setting;
+
+message FactorItem
+{
+     optional string Name    = 1;
+     optional double Volt    = 2;
+     optional double Current = 3;
+}
+
+message FactorInfo
+{
+    repeated FactorItem Scale = 1;   // 数字通道的比例因子
+}
+
+enum SyncMode
+{
+   NO_SYNC_MODE      = 0;          // 不同步
+   LOCAL_SYNC_MODE   = 1;          // 本地同步
+   GLOBAL_SYNC_MODE  = 2;          // 全局同步
+}
+
+message Channel_Info
+{
+     optional string  Name           = 1;   //用户编写的通道名称
+     optional string  MapChannel     = 2;
+     optional uint32  HighWord       = 3;
+     optional uint32  LowWord        = 4;
+}
+
+message Control_Block
+{
+     optional string SrcMAC                     = 1;   // MAC源地址
+     optional string DestMac                    = 2;   // MAC目标地址
+     optional string SVID                       = 3;   // sampled value ID
+     optional int32  APPID                      = 4;   
+     optional int32  VLAN_ID                    = 5;   // VLAN ID
+     optional int32  VLAN_Priority              = 6;   // VLAN Priority
+     optional SyncMode Sync                     = 7;   // 同步方式
+     optional string DataSet                    = 8;   // DataSet
+     optional int32  VerNo                      = 9;   // 版本号
+     optional int32  Port                       = 10;  // 发送端口号，第一个端口号为0， -1表示不发送
+     optional bool   IsOutput                   = 11;
+     optional int32  SamplingDelayTime          = 12;  // 采样延时，单位微秒
+     optional int32  SwitchDelayTime            = 13;  // 交换机延时，单位纳秒
+     optional uint32 SwitchQuality              = 14;  // 交换机品质
+     optional string desc                       = 15;
+     optional string IedName                    = 16;
+     repeated Channel_Info Channel     = 17;
+}
+
+message IEC61850_9_2
+{
+    repeated Control_Block  Block              = 3;
+    optional int32            SamplingRatio             = 4;   // 采样率
+    optional int32            ASDUCount                 = 5;   // ASDU
+    optional bool             NoQualityFlag             = 6;   // 不含品质位 
+    optional FactorInfo       Factor                    = 7;   // 数字通道的比例因子
+    optional bool             OutputIsPrimary           = 8;
+    optional bool             Security                  = 9;
+    optional bool             DataSet                   = 10;
+    optional bool             RefrTm                    = 11;
+    optional bool             SmpRate                   = 12;
+
+}
+
+message IEC61850_9_2LE
+{
+    repeated Control_Block Block    oBlock           = 1;
+    optional int32                  SamplingRatio       = 2;    // 采样率
+    optional int32                  ASDUCount           = 3;    // ASDU
+    optional bool                   NoQualityFlag       = 4;    // 不含品质位 
+    optional FactorInfo             Factor              = 5;    // 数字通道的比例因子
+    optional bool                   OutputIsPrimary     = 6;
+
+}
+
+
+
+

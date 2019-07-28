@@ -1,0 +1,70 @@
+syntax="proto3";
+
+package DiffCurCalcSetting;
+
+enum LockedMethodType    // 制动方程
+{
+    AVG_SUB_I1_I2  = 0;     // (|I1-I2|)/2   
+    AVG_ABS_I1_I2  = 1;     // (|I1|+|I2|)/2
+    MAX_I1_I2      = 2;     // max(|I1|,|I2|)
+    AVG_Id_I1_I2   = 3;     // (||Id-|I1|-|I2||)/2
+    ABS_I2         = 4;     // |I2|
+}
+
+enum DiffMethodType        // 差动方程
+{
+    DIFF_ADD  = 0;        // Id=I1+I2
+    DIFF_SUB  = 1;        // Id=I1-I2
+}
+
+enum PhaseType
+{
+    PHT_A            = 0;  // A相
+    PHT_B            = 1;  // B相
+    PHT_C            = 2;  // C相
+}
+
+enum TransConnectorType    // 变压器接线方式
+{
+    Y_Y_12           = 0;  // Y/Y-12
+    Y_D_11           = 1;  // Y/D-11
+    Y_D_1            = 2;   // Y/D-1
+    Y_D_5            = 3;   // Y/D-5
+    Y_D_7            = 4;   // Y/D-7
+}
+
+enum TransAdapterType          // TA二次接线
+{
+    STAR_WIRING           = 0;  // 全星形接线
+    STANDARD_WIRING       = 1;  // 常规接线
+}
+
+enum CompensationMethodType       // 转角方式
+{
+    HIGH_VOL_COMP      = 0;  // 高压侧转角
+    LOW_VOL_COMP       = 1;  // 低压侧转角
+}
+
+
+enum BalanceCoefCalcType        // 平衡计算系数
+{
+   WITH_CONN_FACTOR     = 0;    // 考虑接线因数
+   WITHOUT_CONN_FACTOR  = 1;    // 不考虑接线因数
+}
+
+message DiffCurCalcInfo       // 差流计算设置
+{
+    double DifferentialCurrent                 = 1;    // 差动电流
+    double LockedCurrent                       = 2;    // 制动电流
+    double HighVolSideFactor                   = 3;    // 高压侧平衡系数
+    double LowVolSideFactor                    = 4;    // 中（低）压侧平衡系数    
+    LockedMethodType   LockedMethod            = 5;    // 制动方程
+    DiffMethodType     DiffMethod              = 6;    // 差动方程
+    PhaseType          Phase                   = 7;    // 测试相
+    TransConnectorType TransConnector          = 8;    // 变压器连接方式
+    TransAdapterType   TASecConnector          = 9;    // TA二次接线方式
+    CompensationMethodType CompMethod          = 10;   // 转角方式
+    BalanceCoefCalcType  ConsiderConnectCoef   = 11;   // 是否考虑接线系数
+}
+
+

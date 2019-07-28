@@ -1,0 +1,117 @@
+syntax="proto3";
+
+package QuickCheckCommon;
+
+import "VectSetting.proto";
+import "DeviceSetting.proto";
+import "BinarySetting.proto";
+import "GoosePublish.proto";
+import "SmvSetting.proto";
+import "ManualInputResultSetting.proto";
+import "SvAbnormalSimulateSetting.proto";
+import "GooseSubscribe.proto";
+
+
+//单相的电压或者单相的电流被定义成一个电压通道或者电流通道
+message Channel
+{
+    VectSetting.ChannelBase   BaseInfo        = 1;
+    double                    Amplitude       = 2;     // 幅值
+    double                    Frequency       = 3;     // 频率
+    double                    Angle           = 4;     // 角度
+    double                    PreAmplitude    = 5;     // 幅值
+    double                    PreFrequency    = 6;     // 频率
+    double                    PreAngle        = 7;     // 角度
+}  
+
+//  3（或者4）相的电压通道，以及3相（或者4）相的电流通道，组成一个"向量单元"
+message Vect
+{
+    string                               Name             = 1; // 本向量的名字，这个将作为关键字,与VectFactorItem中的name字段关联
+    string                               Display          = 2;    
+    repeated Channel                     Channels         = 3; // 具有相同属性的一组电流或者电压通道
+}
+
+message ValueItem
+{
+    int32     Id          = 1;
+    double    Vdc         = 2;
+    repeated  Vect Vects  = 3;
+}
+
+enum  QuickCheckType
+{
+    QUICK_CHECK_4V_3I       = 0;  // 通用试验(4V,3I)
+    QUICK_CHECK_VL_L_3I     = 1;  // 通用试验(VL-L,3I)
+    QUICK_CHECK_SEQ_COMP    = 2;  // 通用试验( 序分量 )
+    QUICK_CHECK_POWER       = 3;  // 通用试验( 功率 )
+    QUICK_CHECK_IMPEDANCE   = 4;  // 通用试验( 阻抗 )
+    QUICK_CHECK_6V_6I       = 5;  // 通用试验(6V,6I)
+    QUICK_CHECK_12V_12I     = 6;  // 通用试验(12V,12I)
+    QUICK_CHECK_1V_6I       = 7;  // 通用试验(1V,6I)
+    QUICK_CHECK_6V_1I       = 8;  // 通用试验(6V,1I)
+    QUICK_CHECK_EXTEND      = 9;  // 通用试验(扩展)
+}
+
+enum ParamType
+{
+   PT_AMPLITUDE = 0;
+   PT_ANGLE     = 1;
+   PT_FREQUENCY = 2;
+}
+
+message AutoProgressChangeVar
+{
+    repeated VectSetting.ChannelBase Channels  = 1;   // 发生递变的通道
+    ParamType Type                             = 2;   // 递变的物理量参数:幅值、角度还是频率
+    double    TimeInterval                     = 3;   // 递变的时间间隔，以毫秒为单位
+    double    Step                             = 4;   // 递变的步长
+    double    Start                            = 5;   // 递变的起始值
+    double    Stop                             = 6;   // 递变的终止值
+}
+
+message ManualChangeVar
+{
+    repeated VectSetting.ChannelBase Channels  = 1;   // 发生递变的通道
+    ParamType Type                             = 2;   // 递变的物理量参数:幅值、角度还是频率
+    double    Step                             = 3;   // 递变的步长
+}
+
+
+message ChangeSetting
+{
+    bool      IsAutoProgressChange                = 1;   // 是自动触发还是手动触发
+    repeated  AutoProgressChangeVar  AutoProgress = 2;   // 自动触发设置
+    repeated  ManualChangeVar        ManualChange = 3;   // 手动触发设置
+}
+
+message EvalSetting
+{
+    bool     hasEvalModule        = 1;
+    bool     SelectedRelativeErr  = 2;
+    double   RelativeErr          = 3;
+    bool     SelectedAbsoluteErr  = 4;
+    double   AbsoluteErr          = 5;
+}
+
+message QuickCheckTest
+{
+    QuickCheckType                         Type             = 1;  
+    ChangeSetting                          Change           = 2;
+    bool                                   IsAgeingeTest    = 3;  // 是否是老化试验
+    double                                 TrigKeepTime     = 4;  // 触发后的保持时间
+    bool                                   IsAddStability   = 5;  // 是否有两个状态选项,第一个是稳定状态
+    double                                 StabilityTime    = 6;   // 故障前延时，单位秒
+    ValueItem                              Data             = 7;  // 电压、电流组向量的值数组
+    DeviceSetting.VdcInfo                  Vdc              = 8; 
+    BinarySetting.BinaryInfo               Binary           = 9;
+    Goose_Pub_Setting.Goose_Publish        GoosePub         = 10; // goose 发送
+    SmvSetting.SmvResultInfo               smvResult        = 11; // 采样值tabpage页配置
+    ManualInputResultSetting.InputResult   ManualResult     = 12; // 手动输入的结果
+    double                                 ActionTime       = 13;
+    SvAbnormalSimulateSetting.AbnormalInfo Abnormal         = 14; // SV异常模拟设置
+    Goose_Sub_Setting.Goose_Sub            GooseSub         = 15; // 用于虚端子的测试,增加这个字段的目的是将来会取消iec61850配置，所以这里需要保留一份
+    EvalSetting                            EvalInfo         = 16; // 评估及测试结果             
+
+}
+

@@ -1,0 +1,23 @@
+syntax="proto3";
+
+package RelaySwitchOut;
+
+
+message TRIPMAP
+{
+	uint32 IK = 1;       //0-9通道号
+	uint32 TripABC = 2; //是否跳三相，0：true， 1：False
+}
+
+//通用参数
+message SwitchPara
+{
+	repeated TRIPMAP iTripBuf =1; 	//
+	repeated uint32 iKOutput = 2;  	//0:打开 1关闭
+	uint32 iOutMode = 3;   			//0:时间启动 1:开入量启动
+	float fTurnTime = 4;    		// 开出翻转时刻
+	float fHoldTime = 5;    		// 开出保持时间
+}
+
+
+

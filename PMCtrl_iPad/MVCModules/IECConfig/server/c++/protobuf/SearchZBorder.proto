@@ -1,0 +1,191 @@
+syntax="proto3";
+import "RelaySwitchOut.proto";
+
+package SearchZBorder;
+//故障类型
+enum Error_type
+{
+	Error_A_JD = 0;//
+  Error_B_JD = 1;// 
+  Error_C_JD = 2;//
+  Error_AB_DL = 3;//
+  Error_BC_DL = 4;//
+  Error_CA_DL = 5;//
+  Error_AB_JDDL = 6;
+  Error_BC_JDDL = 7;
+  Error_CA_JDDL = 8;
+  Error_ABC_DL = 9;
+  Error_SINGLE_ZK = 10;
+}
+
+message chanel
+{
+	float famptitude = 1;//幅值
+	float fphase = 2;//相位
+}
+message BasicResultItem
+{
+	chanel Va=1;
+	chanel Vb=2;
+	chanel Vc=3;
+	chanel Ia=4;
+	chanel Ib=5;
+	chanel Ic=6;
+}
+
+message TestItem_SearchZBorder
+{
+	uint32 iIndex = 1;
+  Error_type errortype = 2; //故障类型
+  float fEnd_Z = 3;         //末端阻抗
+  float fEnd_ZAngle = 4;      //末端阻抗角
+  float fHead_Z = 5;
+	float fHead_ZAngle = 6;
+	float fZ_Step = 7;          //阻抗变化步长
+	float fDL_I = 8;          //短路电流
+	float fDL_V = 9;          //短路电压
+	float fMaxErrorTime = 10;      //最大故障时间
+	float fLoadCurrent = 11;  //负荷电流
+	float fLoadAngle = 12;  //负荷功角
+
+}
+
+message TestItem_SearchZBorder_Result
+{
+	uint32 iIndex = 1;
+	BasicResultItem basic =2;
+	float fZ = 3;
+	float fZAngle = 4;
+	float fTime = 5;
+	bool bAct=6;
+	bool bEnd=7;
+	uint32 nibinstate=8; //开入量
+}
+
+enum OutPutType	//输出类型
+{
+        analog_type = 0;//模拟量类型
+        digital_type =1;//数字量类型
+        analog_digital_type = 2;//数字量+模拟量
+}
+
+message Items
+{
+	CommonPara oComm = 1;  //通用参数
+        RelaySwitchOut.SwitchPara oSwitch = 2; //开关量参数
+	repeated TestItem_SearchZBorder oItems = 3;    //下发的试验参数列表
+        OutPutType outputType = 4;//输出类型
+}
+
+//TV安装位置 
+enum PTCON
+{
+   BUS = 0;
+   LINE  = 1;
+}
+//TA正极性
+enum CTPOINT
+{
+	POINT_BUS = 0;
+	POINT_LINE = 1;
+}
+
+//断路器是否模拟
+enum BCSIMULATION
+{
+	NO = 0;
+	YES = 1;
+
+}
+
+//合闸角选择
+enum FaultIncMode
+{
+	RANDOM = 0;
+	CONSTANT = 1;
+}
+
+//叠加非周期分量
+enum DCSIM
+{
+	NOOVERLYING = 0;
+	OVERLYING = 1;
+}
+
+//计算方式
+enum TestMode
+{
+	CONSTI = 0;
+	CONSTV = 1;
+	CONSTZ = 2;
+}
+
+//KoMode 零序补偿系数计算方式
+enum KoMode
+{
+  K0 = 0;
+  KRKX = 1;
+  Z0 = 2;
+}
+
+//Uz输出定义
+enum VZDEFINE
+{
+	ZERO = 0;
+	Z3X3VO = 1;
+	F3X3VO = 2;
+	Z3VO = 3;
+	F3VO = 4;
+}
+
+//Uz参考相定义
+enum VZPHDEFINE
+{
+	VA_PHASE = 0;
+	VB_PHASE = 1;
+	VC_PHASE = 2;
+	VAB_PHASE = 3;
+	VBC_PHASE = 4;
+	VCA_PHASE = 5;
+}
+
+//搜索方法
+enum Search_Type
+{
+	Search_Type_Search_Type = 0;
+	Search_Type_Single = 1;
+
+}
+
+//通用参数
+message CommonPara
+{
+	float EDV = 1;  //额定线电压
+	float EDI = 2;  //额定电流
+	float EDHZ = 3;  //额定频率
+	float PrepareTime = 4;//常态时间
+	float PreFaultTime = 5; //故障前时间
+	float PostFaultTime = 6; //保护动作后持续时间
+	PTCON ePTCON = 7;
+	CTPOINT eCTPOINT = 8;//
+	BCSIMULATION eBCSIMULATION = 9;//
+	float TripTime = 10;//
+	float CloseTime = 11;//
+	FaultIncMode eFaultIncMode=12;
+	float FaultAngle=13; //合闸角
+	DCSIM eDCSIM = 14;
+	TestMode eTestMode=15;
+	float Zs=16; //系统阻抗
+	float Phis=17; //系统阻抗角
+	float KOA = 18; //
+	float KOB = 19;
+	KoMode eKoMode = 20;
+	Search_Type eSearchType = 21;
+	VZDEFINE eVZDEFINE  = 22;//
+	VZPHDEFINE eVZPHDEFINE  = 23;//
+	float VzPhdiff = 24;//
+	float KOAs = 25;
+	float KOBs = 26;
+}
+
+//开关量参数

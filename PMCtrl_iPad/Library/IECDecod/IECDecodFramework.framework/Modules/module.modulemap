@@ -1,0 +1,6 @@
+framework module IECDecodFramework {
+  umbrella header "IECDecodFramework.h"
+
+  export *
+  module * { export * }
+}

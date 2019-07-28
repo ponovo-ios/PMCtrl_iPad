@@ -1,0 +1,109 @@
+syntax="proto3";
+
+package Gradient;
+
+enum TestItem_type
+{
+  GradientMode1 = 0;
+  Gradient6IMode2 = 1;
+}
+
+//通用参数
+message CommonPara
+{
+	float EDV = 1;  //额定线电压
+	float EDI = 2;  //额定电流
+	float EDHZ = 3;  //额定频率
+	float PrepareTime = 4;//故障前时间
+	float PreFaultTime = 5;
+	float V0=6;
+	float I0=7;
+	float Phi0=8;
+}
+
+//整定参数
+message MarkPara
+{
+	float Setting=1;
+}
+
+//开关量参数
+message SwitchPara
+{
+	uint32 KA=1;
+	uint32 KB=2;
+	uint32 KC=3;
+	uint32 KD=4;
+	uint32 KE=5;
+	uint32 KF=6;
+	uint32 KG=7;
+	uint32 KH=8;
+	uint32 KI=9;
+	uint32 KJ=10;
+	uint32 Logic=11;
+	uint32 Out1=12;
+	uint32 Out2=13;
+	uint32 Out3=14;
+	uint32 Out4=15;
+	uint32 Out5=16;
+	uint32 Out6=17;
+	uint32 Out7=18;
+	uint32 Out8=19;
+}
+
+message TestItemGradient
+{
+	uint32 iIndex = 1;
+	uint32 eErrorMode=2;  //故障类型
+	uint32 eChangValue=3;  //变化量
+	uint32 eUType=4;
+	float fU=5;
+	float fI=6;
+	float fAngle=7;
+	uint32 eRecordValue=8;
+	float fHz=9;
+	float fStart=10;
+	float fEnd=11;
+	float fStep=12;
+	float fErrorTime=13;
+	uint32 eReturnType=14;
+	bool bNege=15;
+}
+
+message TestItemGradient6I
+{
+	uint32 iIndex = 1;
+	uint32 eChange=2;  //故障类型
+	uint32 eChangType=3;  //变化量
+	float fV1=4;
+	float fV2=5;
+	float fAngle=6;
+	float fHz=7;
+	float fStart=8;
+	float fEnd=9;
+	float fStep=10;
+	float fErrorTime=11;
+	uint32 eReturnType=12;
+
+}
+
+message TestItem_Switch_State
+{
+	uint32 nibinstate=1; //开入量
+
+}
+
+message Items
+{
+	CommonPara oComm = 1;  //通用参数
+	SwitchPara oSwitch = 2; //开关量参数
+	MarkPara oMarkSet = 3;  //整定值参数
+  repeated data oData = 4;
+}
+
+message data
+{
+    TestItem_type type = 1;
+    TestItemGradient oItems = 2;    //下发的实验参数列表
+    TestItemGradient6I o6IItems = 3;    //下发的实验参数列表
+}

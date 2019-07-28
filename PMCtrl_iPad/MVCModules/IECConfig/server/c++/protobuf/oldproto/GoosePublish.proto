@@ -1,0 +1,34 @@
+
+import "GooseCommon.proto";
+package Goose_Pub_Setting;
+
+
+message Control_Block
+{
+     optional string                     IedName            = 1;
+     optional  string                     gocbRef            = 2;
+     optional uint32                     timeAllowToLive    = 3;    // 允许生存时间单位毫秒
+     optional string                     DataSet            = 4;
+     optional string                     goID               = 5;
+     optional bool                       ndsCom             = 6;
+     optional bool                       testFlag           = 7;
+     optional uint32                     APPID              = 8;
+     optional string                     SrcMAC             = 9;
+     optional string                     DestMac            = 10;
+     optional int32                      VLAN_ID            = 11;
+     optional int32                      VLAN_Priority      = 12;
+     optional uint32                     ConfRecv           = 13;
+     optional int32                      Port               = 14;   // 发送端口号，第一个端口号为0， -1表示不发布
+     optional bool                       IsOutput           = 15;  //控制块是否选中
+     repeated Goose_Common.Channel_Info  Channel   = 16;
+}
+
+message Goose_Publish
+{
+     repeated Control_Block  Block                   = 1;
+     optional int32                   EmergencyDeliveryTime   = 2;  // 最短传输时间T1，单位毫秒
+     optional int32                   FasterDeliveryTime      = 3;  // 快速重传时间
+     optional int32                   StableDeliveryTime      = 4;  // 稳定条件下重传时间T0，单位毫秒
+     optional int32                   TimeQualityFlag         = 5;  // 时间品质，缺省值0x0A
+     optional int32                   PackageTimeInterval     = 6;  // 其他组发送GOOSE时相对于第一组发送时的时延,单位毫秒
+}

@@ -1,0 +1,20 @@
+﻿syntax="proto3";
+
+package deviceinfogroup;
+
+message info
+{
+	string strip = 1;
+	uint32 ndevicenum = 2;
+	bool   bhasanalog = 3;
+	uint32 nvoltchanelnum  =4;
+	uint32 ncurrentchanelnum = 5;
+	float  fvoltmax = 6; 
+	float  fcurmax = 7;
+	bool   bhasdigital = 8;
+}
+
+message setinfo
+{
+	string strip = 1;
+}

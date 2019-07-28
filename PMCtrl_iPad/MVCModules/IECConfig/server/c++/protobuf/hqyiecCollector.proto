@@ -1,0 +1,58 @@
+﻿syntax="proto3";
+
+package hqyIECCollector_Setting;
+
+enum Channel_Type
+{
+   FOR_PROTECT = 0;
+   FOR_MEASURE = 1;
+   FOR_VOLTAGE = 2;
+}
+
+enum Mutual_Inductor_Type
+{
+   TR_1_PHASE       = 0;      // 单相互感器 
+   TR_3_PHASE_CT    = 1;      // 3相电流互感器
+   TR_3_PHASE_PT    = 2;      // 3相电压互感器
+   TR_3_PHASE_PT_CT = 3;      // 3相电压电流互感器
+   TR_2_BUS_VOL     = 4;      // 2条母线电压
+   TR_3_BUS_VOL     = 5;      // 3条母线电压
+}
+
+message Channel_Info
+{
+	 string Name                = 1;   // 用户编写的通道名称
+     string Description         = 2;   // SCD文件中读取的通道名称
+     string MapId               = 3;
+     Channel_Type Type          = 4;
+}
+
+message Control_Block
+{
+    uint32 StateFlag1              = 1;          // 状态字1
+    uint32 StateFlag2              = 2;          // 状态字2
+    uint32 RatedDelayTime          = 3;          // 额定延时，单位微秒
+    Mutual_Inductor_Type Type      = 4;          // 互感器类型 
+    double Temperature             = 5;          // 温度，单位摄氏度
+    int32  Port                    = 6;          // 发送端口号，第一个端口号为0， -1表示不发布
+    string desc                    = 7; 
+    repeated Channel_Info Channel  = 8;
+}
+
+message IECCollector
+{
+    repeated Control_Block  Block         = 1;
+    int32      SamplingRatio              = 2;     // 采样率
+    int32      BaudRate                   = 3;     // 波特率
+    double     RatedProtectCurrent        = 4;     // 额定保护电流,单位:安培A
+    double     RatedZeroSeqCurrent        = 5;     // 额定零序电流,单位:安培A
+    double     RatedPhaseVoltage          = 6;     // 额定相电压,1/（10*1.732）KV 为单位
+    bool       Is_Syn_Output              = 7;     // 是否同步输出，同步输出为true，非同步输出为false
+                                                    // 是否接收来自MU的同步脉冲，接收同步脉冲为true，不接收同步脉冲为false
+    bool            OutputIsPrimary       = 8;
+}
+
+
+
+
+

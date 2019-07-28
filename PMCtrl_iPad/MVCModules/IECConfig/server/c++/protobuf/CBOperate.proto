@@ -1,0 +1,260 @@
+syntax="proto3";
+import "hqyGoosePublish.proto";
+
+package CBOperate;
+import "RelaySwitchOut.proto";
+
+//故障类型
+enum Error_type
+{
+  Error_A_JD = 0;//
+  Error_B_JD = 1;// 
+  Error_C_JD = 2;//
+  Error_AB_DL = 3;//
+  Error_BC_DL = 4;//
+  Error_CA_DL = 5;//
+  Error_AB_JDDL = 6;
+  Error_BC_JDDL = 7;
+  Error_CA_JDDL = 8;
+  Error_ABC_DL = 9;
+  Error_SINGLE_ZK = 10;
+}
+
+message chanel
+{
+	float famptitude = 1;//幅值
+	float fphase = 2;//相位
+}
+message BasicResultItem
+{
+	chanel Va=1;
+	chanel Vb=2;
+	chanel Vc=3;
+	chanel Ia=4;
+	chanel Ib=5;
+	chanel Ic=6;
+}
+
+enum Error_Dirc   //故障方向
+{
+  reverse = 0;  //反向
+  positive = 1; //正向
+}
+
+enum OutPutType	//输出类型
+{
+	analog_type = 0;//模拟量类型
+	digital_type =1;//数字量类型
+	analog_digital_type = 2;//数字量+模拟量
+}
+
+enum Error_Nature   //故障方向
+{
+  instant = 0;  //瞬时
+  perpetual = 1;  //永久
+}
+
+message TestItem_CBOperate
+{
+	uint32 iIndex = 1;
+        Error_type errortype = 2;  //故障类型
+        float fdl_zk = 3;          //短路阻抗
+        float fZK_Angle = 4;       //阻抗角
+        float fR = 5;
+	float fX = 6;
+	float fDL_I = 7;           //短路电流
+	float fDL_V = 8;           //短路电压
+	Error_Dirc dirc = 9;       //故障方向
+	Error_Nature nature = 10;  //故障性质
+	float fMaxErrorTime = 11;  //最大故障时间
+	float fLoad_I		= 12;  //负荷电流
+	float fLoad_Ang	    = 13;  //负荷功角
+	uint32 iTransSwitch = 14;  //转换性故障，0:关闭，1：打开
+	TransFaltState oTransFaltState = 15; //转换性故障参数
+	hqyGoose_Pub_Setting.Goose_Publish GooseChanged = 16; //Goose
+	
+}
+
+message TransFaltState
+{
+	Error_type errortype = 1;  //故障类型
+	float fTansTime = 2;       //转换时间
+        float fdl_zk = 3;          //短路阻抗
+        float fZK_Angle = 4;       //阻抗角
+	float fDL_I = 7;           //短路电流
+	float fDL_V = 8;           //短路电压
+	Error_Dirc dirc = 9;       //故障方向
+}
+
+message TestItem_CBOperate_Result
+{
+	uint32 iIndex = 1;
+	float fta = 2;  //跳A
+	float ftb = 3;  //跳B
+	float ftc = 4;  //跳C
+	float fchz = 5; //重合闸
+	float fhjs = 6; //后加速
+	float frta = 7; //A相保持时间
+	float frtb = 8; //B相保持时间
+	float frtc = 9; //C相保持时间
+	float frtd = 10; //重合闸保持时间
+}
+
+message TestItem_CBOperate_Switch_State
+{
+	uint32 nibinstate=1; //开入量
+
+}
+
+message Items
+{
+        CommonPara oComm = 1;  //通用参数
+        RelaySwitchOut.SwitchPara oSwitch = 2; //开关量参数
+        repeated TestItem_CBOperate oItems = 3;    //下发的实验参数列表
+        OutPutType outputType = 4;//输出类型
+}
+
+//KoMode 零序补偿系数计算方式
+enum KoMode
+{
+  K0 = 0;
+  RERL = 1;
+  Z0 = 2;
+}
+
+//故障触发方式
+enum FaultTrigeMode
+{
+  TIME = 0;
+  KEY = 1;
+  H = 2;
+  GPS = 3;
+}
+//TV安装位置 
+enum PTCON
+{
+   BUS = 0;
+   LINE  = 1;
+}
+//TA正极性
+enum CTPOINT
+{
+	POINT_BUS = 0;
+	POINT_LINE = 1;
+}
+
+//重合方式
+enum RcloseMode
+{
+	CLOSE_MIX   = 0;
+	CLOSE_THREE = 1;
+	CLOSE_NONE  = 2;
+	
+
+}
+
+enum ControlMode
+{
+	CONTROL_SIG = 0;
+	CONTROL_TIME = 1;
+
+}
+
+//断路器是否模拟
+enum BCSIMULATION
+{
+	NO = 0;
+	YES = 1;
+
+}
+
+//阻抗表示方式
+enum RXS
+{
+	Z = 0;
+	RX = 1;
+}
+
+//Uz输出定义
+enum VZDEFINE
+{
+	ZERO = 0;
+	Z3X3VO = 1;
+	F3X3VO = 2;
+	Z3VO = 3;
+	F3VO = 4;
+	PHDEFINE = 5;
+}
+
+//Uz参考相定义
+enum VZPHDEFINE
+{
+	VA_PHASE = 0;
+	VB_PHASE = 1;
+	VC_PHASE = 2;
+	VAB_PHASE = 3;
+	VBC_PHASE = 4;
+	VCA_PHASE = 5;
+}
+
+//计算方式
+enum TESTMODE
+{
+	NCHANGE_CUR = 0; //电流不变
+	NCHANGE_VOL = 1; //电压不变
+	NCHANGE_RES = 2; //阻抗不变
+
+}
+
+//合闸角选择
+enum FAULTINCMODE
+{
+        RAND  = 0;//随机
+        CONST = 1;//定值
+
+}
+
+//叠加非周期
+enum DCSIM
+{
+    ADD = 0;//叠加	
+    ADD_NONE = 1;//不叠加
+
+}
+
+//通用参数
+message CommonPara
+{
+	float EDV = 1;  	//额定线电压
+	float EDI = 2;  	//额定电流
+	float EDHZ = 3;  	//额定频率
+	float PreFaultTime = 4;	 //故障前时间，秒
+	float PostFaultTime = 5; //保护动作后续时间，秒
+	FaultTrigeMode eFaultTrigMode = 6;//故障触发方式
+	PTCON ePTCON = 7;	  //TV安装位置
+        CTPOINT eCTPOINT = 8;     //TA正极性
+	ControlMode eControlMode = 9; //实验过程方式	
+	RcloseMode  eRcloseMode  = 10; //重合方式
+	float fTripTimeSet    = 11;    //开关跳开后续时间，秒
+	float fReCloseTimeSet = 12;    //开关重合持续时间，秒
+	float fAccTripTimeSet = 13;    //后加速开关跳开后持续时间，秒
+	KoMode Emode = 14;   //零序补偿系数计算方式
+	float fKoOrRe = 15;  //零序补偿比例系数
+	float fPhiOrIm = 16; //零序相位补偿系数
+	TESTMODE eTestMode = 17; //计算方式
+        float fZs = 18;		//系统阻抗
+        float fPhis = 19;       //系统阻抗角
+	BCSIMULATION eBCSIMULATION = 20; //断路器模拟
+        float fTripTime = 21;	//分闸时间，毫秒
+        float fCloseTime = 22;	//合闸时间，毫秒
+        RXS eRXS = 23;          //
+	VZDEFINE eVZDEFINE  = 24;//
+	VZPHDEFINE eVZPHDEFINE  = 25;//
+	float VzPhdiff = 26;//
+	float GpsTime = 27;//
+        uint32 SwitchChanel = 28;//开入量触发通道
+        FAULTINCMODE eFAULTINCMODE = 29;//合闸角选择
+        float fFaltAng = 30;//合闸角
+        DCSIM eDCSIM = 31;//叠加非周期分量
+}
+

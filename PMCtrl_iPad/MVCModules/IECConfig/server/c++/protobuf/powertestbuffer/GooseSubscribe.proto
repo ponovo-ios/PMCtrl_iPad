@@ -1,0 +1,48 @@
+syntax="proto3";
+
+import "GooseCommon.proto";
+
+package Goose_Sub_Setting;
+
+message BindItem
+{
+    uint32 row      = 1;
+    uint32 col      = 2;
+    uint32 bits     = 3;
+}
+
+message BindInfo
+{
+    repeated BindItem Items = 1;
+}
+
+message Control_Block
+{
+     string     IedName                          = 1;
+     string     gocbRef                          = 2;
+     string     goID                             = 3;
+     uint32     APPID                            = 4;
+     string     DestMac                          = 5;
+     uint32     ConfRecv                         = 6;
+     uint32     timeAllowToLive                  = 7;   // 允许生存时间单位毫秒
+     string     DataSet                          = 8;
+     bool       ndsCom                           = 9;
+     bool       testFlag                         = 10;
+     int32      Port                             = 11;   // 订阅端口号，第一个端口号为0， -1表示不订阅
+     bool       IsSubscribe                      = 12;   // 是否订阅
+     bool       NoGoCB                           = 13;   // 对GoCB、GOOSEID和APPID不做解析
+     repeated Goose_Common.Channel_Info  Channel = 14;
+     BindInfo   Bind                             = 15;
+}     
+     
+message Goose_Sub
+{
+    repeated Control_Block Block  = 1;
+}
+
+
+
+
+
+
+

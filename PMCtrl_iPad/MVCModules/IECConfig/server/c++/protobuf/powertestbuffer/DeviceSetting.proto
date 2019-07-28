@@ -1,0 +1,124 @@
+syntax="proto3";
+
+package DeviceSetting;
+
+enum DeviceCatalog
+{
+   CAT_ANALOG_DEV  = 0;       // 模拟输出
+   CAT_DIGITAL_DEV = 1;       // 数字输出
+   CAT_AD_MIX_DEV  = 2;       // 数模一体
+}
+
+enum BinVolLevel
+{
+   L_LOW  = 0;       // 高电平
+   L_HIGH = 1;       // 低电平
+}
+
+enum BinLogical
+{
+   L_BREAK_OUT = 0;  // 断开
+   L_CLOSE_UP  = 1;  // 闭合
+}
+
+message SignalFactor
+{
+     double Primary       = 1;
+     double Secondary     = 2;
+     string PrimaryUnit   = 3; 
+     string SecondaryUnit = 4; 
+}
+
+message FactorItem
+{
+    string         Name     = 1;
+    SignalFactor   Volt     = 2;
+    SignalFactor   Current  = 3;
+}
+
+message FactorInfo
+{
+    repeated FactorItem Vect = 1;
+}
+
+message VectFactor
+{
+     bool            ParamIsPrimary   = 1;   // 参数设置的是一次值（true）还是二次值（false）
+     bool            OutputIsPrimary  = 2;   // 输出信号是一次值（true）还是二次值（false）
+     FactorInfo      Setting          = 3;   // 变比设置   
+}
+
+
+message Iec61588Info
+{
+     bool   IEC61588IsPer2PerSyn  = 1;  // IEC61588的同步机制：可选项-对等延时（peer-to-peer synchronization ）和 延时请求-相应
+     int32  SignalInputPort       = 2;  // IEC61588报文的输入端口 
+}
+
+message IpAddress
+{
+    string Ip   = 1;
+    int32  Port = 2;
+}
+
+message BinaryInfo
+{
+    bool        IsDeadContact = 1;    // 是否是空接点
+    BinLogical  Logical       = 2;    // 逻辑意义(断开或者闭合)
+    BinVolLevel Level         = 3;    // 开关电平
+    double      threshold     = 4;    // 开关翻转电压
+}
+
+message BinaryInSetting
+{
+    repeated BinaryInfo BinaryInChannel = 1; 
+}
+
+message VdcInfo
+{
+    bool      VdcOutputConstant     = 1;   // 是否递变还是恒定供电
+    double    ConstantVolt          = 2;   // 恒定供电电压值
+}
+
+message ExternalMagnifierInfo        // 外接放大器
+{
+    bool HasOptions               = 1;  // 是否具有这个选项，对于模拟量输出的装置，这个值为true，对于数字量输出的装置，这个值为false
+    bool HasExternalMagnifier     = 2;  // 当HasOptions为真是，是否具有放大器
+}
+
+message CurrentHiPowerInfo
+{
+    bool  HasOptions          = 1;   // 是否具有这个选项，仅当值为true时，以下的选项才有意义.对于模拟量输出的装置，这个值为真，对于数字量装置，这个值为假
+    bool CurrentHiPowerOutput = 2;
+}
+
+message VectStruct
+{
+    VectFactor      Factor          = 1;
+    double RatedLineVoltage         = 2;       // 额定线电压,单位V
+    double RatedCurrent             = 3;       // 额定电流，单位A
+    double RatedFrequency           = 4;       // 额定频率，单位HZ
+    int32  BinaryInCount            = 5;
+    BinaryInSetting BinaryIn        = 6;
+    int32  BinaryOutCount           = 7;
+    double BinFilterTremble         = 8;
+    int32  Weak_Ch_Count            = 9;
+    int32  Weak_ch_count_for_packet = 10;
+    int32  Send_Port_Count          = 11;
+    IpAddress TestDeviceAddr        = 12;
+    IpAddress ServerAddr            = 13;
+    IpAddress CtrlBoardAddr         = 14;
+    string DeviceType               = 15;
+    Iec61588Info Iec61588           = 16;
+    bool FiberIsDoubleCircuit       = 17;       // 光纤的连接方式:可选项-双回路(Double Circuit )和单回路( Single Circuit)
+    bool BCodeIsPossiveLogic        = 18;       // B码逻辑：可选项-正逻辑和负逻辑
+    double MaxOutVolt               = 19;
+    double MaxOutCurrent            = 20;
+    double MaxOutDCVolt             = 21;
+    ExternalMagnifierInfo OutMagnifier = 22;    // 外部放大器的配置
+    CurrentHiPowerInfo CurrentHiPower = 23;    // 电流过载输出的配置
+    bool HasVdcInfo                    = 24;    // 是否具有VdcInfo选项，仅当值为true时，VdcInfo才有意义
+    DeviceCatalog  DevClass            = 25;
+    int32 MaxHarmnicIndex              = 26;
+}
+

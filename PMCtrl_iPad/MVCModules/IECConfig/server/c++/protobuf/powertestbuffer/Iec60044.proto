@@ -1,0 +1,69 @@
+syntax="proto3";
+import "VectSetting.proto";
+import "WeakSignal.proto";
+
+package IEC60044_Setting;
+
+enum Channel_Type
+{
+   FOR_PROTECT = 0;
+   FOR_MEASURE = 1;
+   FOR_VOLTAGE = 2;
+}
+
+message Channel_Info
+{
+     string Name                = 1;   // 用户编写的通道名称
+     string Description         = 2;   // SCD文件中读取的通道名称
+     string MapChannel          = 3;
+     Channel_Type Type          = 4;
+}
+
+message Control_Block
+{
+     uint32 LDName                    = 1;
+     uint32 DataSetName               = 2;
+     uint32 StateFlag1                = 3;    // 状态字1
+     uint32 StateFlag2                = 4;    // 状态字2
+     uint32 RatedDelayTime            = 5;    // 额定延时，单位微秒
+     int32  Port                      = 6;    // 发送端口号，第一个端口号为0， -1表示不发送
+     string desc                      = 7;     
+     repeated Channel_Info Channel    = 8;
+     bool   IsOutput                  = 9;  //控制块是否选中
+     bool   IsStandard               = 10;
+}
+
+enum User_Type
+{
+    STATE_GRID   = 0;  //IEC60044-8(国网)
+    NR_ELECTRIC  = 1;  //IEC60044-8(南瑞)
+    USER_COUNT   = 2;
+}
+
+message IEC60044_Info
+{
+     repeated Control_Block    Block                   = 1;
+     int32                     SamplingRatio           = 2;      // 采样率
+     int32                     ASDUCount               = 3;      // ASDU
+     int32                     SCP                     = 4;
+     int32                     SCM                     = 5;
+     int32                     SV                      = 6;
+     int32                     TargetDevSamplingRatio  = 7;      // 被测装置采样率
+     double                    BaudRate                = 8;
+     double                    RatedProtectCurrent     = 9;     // 保护额定电流,单位:安培A
+     double                    RatedZeroSeqCurrent     = 10;     // 零序额定电流,单位:安培A
+     double                    RatedPhaseVoltage       = 11;     // 额定相电压 1/(10*1.732)KV为单位
+     Weak_Signal_setting.Weak_signal_Field Weak        = 12;
+     bool                      OutputIsPrimary         = 13;
+}
+
+message IEC60044
+{
+    User_Type type                             = 1;
+    repeated  IEC60044_Info Info               = 2;    // 根据type的不同选用不同的条目
+    VectSetting.ChannelList MapChannelList     = 3; 
+}
+
+
+
+

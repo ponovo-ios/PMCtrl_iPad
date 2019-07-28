@@ -1,0 +1,74 @@
+syntax="proto3";
+
+package GooseFault;
+
+enum GooseFaultType
+{
+    STD_VALID_PACKET               = 0;       // 有效报文，标准发送机制(Q/GDW441)
+    LOST_PACKET                    = 1;       // 丢帧
+    RESEND_PACKET                  = 2;       // 重复帧
+    TIME_TO_LIVE_INVALID           = 3;       // 存活时间无效
+    SCHEDULE_SEND_PACKET           = 4;       // 按定时间隔发送报文
+    DESYNC_IN_TIME_QUALITY         = 5;       // 时间品质：时钟未同步
+    CLK_ERR_IN_TIME_QUALITY        = 6;       // 时间品质：时钟故障
+    SEQNUM_DISORDER                = 7;       // sqNum错序
+    CONST_SEQNUM_WITH_VAR_STNUM    = 8;       // sqNum保持不变，stNum每帧变化
+    CONST_SEQNUM_WITH_TIMER_STNUM  = 9;       // sqNum保持不变，stNum每帧变化,每帧按给定时间间隔发送
+    CONST_SEQNUM_WITH_CONST_STNUM  = 10;      // sqNum,stNum保持不变,每帧按给定时间间隔发送
+    SINGLE_PACKET                  = 11;      // 单帧报文发送
+}
+
+message LostPacketInfo       // 丢帧
+{
+    int32 Count = 1;
+}
+
+message DuplicatePacketInfo  // 重复帧
+{
+    int32 Count = 1;
+}
+
+message SchedulePacketInfo   //  按定时间隔发送报文,单位毫秒
+{
+    int32 interval = 1;   
+}
+
+message TimerStNumInfo      // sqNum保持不变，stNum每帧变化,每帧按给定时间间隔发送，单位毫秒
+{
+    int32 interval = 1;  
+}
+
+message FixedStNumInfo      // sqNum,stNum保持不变,每帧按给定时间间隔发送，单位毫秒
+{
+    int32 interval = 1;  
+}
+
+//message FaultItem
+//{
+//    GooseFaultType      Type            = 1;  // 故障类型,用于选择下面的附加信息
+//    LostPacketInfo      LostPacket      = 2;  // 丢帧
+//    DuplicatePacketInfo DuplicatePacket = 3;  // 重复帧
+//    SchedulePacketInfo  SchedulePacket  = 4;  //  按定时间隔发送报文,单位毫秒
+//    TimerStNumInfo      TimerStNum      = 5;  // sqNum保持不变，stNum每帧变化,每帧按给定时间间隔发送，单位毫秒
+//    FixedStNumInfo      FixedStNum      = 6;  // sqNum,stNum保持不变,每帧按给定时间间隔发送，单位毫秒
+//}
+
+message GooseFaultInfo
+{
+    bool                hasGooseFault   = 1;
+    GooseFaultType      Type            = 2;  // 故障类型,用于选择下面的附加信息
+    LostPacketInfo      LostPacket      = 3;  // 丢帧
+    DuplicatePacketInfo DuplicatePacket = 4;  // 重复帧
+    SchedulePacketInfo  SchedulePacket  = 5;  // 按定时间隔发送报文,单位毫秒
+    TimerStNumInfo      TimerStNum      = 6;  // sqNum保持不变，stNum每帧变化,每帧按给定时间间隔发送，单位毫秒
+    FixedStNumInfo      FixedStNum      = 7;  // sqNum,stNum保持不变,每帧按给定时间间隔发送，单位毫秒
+    bool                IsSetInitStNum  = 8;
+    int32               StNum           = 9;
+    bool                IsSetInitSqNum  = 10;
+    int32               SqNum           = 11;                 
+    bool                IsSetGooseTime  = 12;
+    int32               T1              = 13;
+    int32               T2              = 14;
+    int32               T3              = 15;
+    int32               T0              = 16;
+}

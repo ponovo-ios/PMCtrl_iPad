@@ -1,0 +1,21 @@
+syntax="proto3";
+
+package ManualInputResultSetting;
+
+message InputItem
+{
+    string Content   = 1;   // ÄÚÈİ
+    string Result    = 2;   // ½á¹û
+}
+
+message InputResult
+{
+    repeated InputItem Item = 1; 
+}
+
+
+
+
+                                                            
+
+

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="BD_QuickTestParamHeaderViewID" id="iN0-l3-epB" customClass="BD_QuickTestParamHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="335" height="53"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="频率(Hz)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U0Y-tZ-gKs">
+                    <rect key="frame" x="238.5" y="18" width="91.5" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="相位(°)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aeb-PG-i3j">
+                    <rect key="frame" x="141.5" y="18" width="92" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="幅值(V)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CR4-fu-dor">
+                    <rect key="frame" x="45" y="18" width="91.5" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="aeb-PG-i3j" firstAttribute="width" secondItem="U0Y-tZ-gKs" secondAttribute="width" id="0FE-2a-Ha4"/>
+                <constraint firstItem="CR4-fu-dor" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="45" id="8gV-Sz-Aem"/>
+                <constraint firstItem="CR4-fu-dor" firstAttribute="width" secondItem="aeb-PG-i3j" secondAttribute="width" id="ACo-Fd-FO1"/>
+                <constraint firstItem="aeb-PG-i3j" firstAttribute="leading" secondItem="CR4-fu-dor" secondAttribute="trailing" constant="5" id="CMk-R0-8y5"/>
+                <constraint firstItem="U0Y-tZ-gKs" firstAttribute="leading" secondItem="aeb-PG-i3j" secondAttribute="trailing" constant="5" id="Dfq-OJ-Q3J"/>
+                <constraint firstItem="aeb-PG-i3j" firstAttribute="centerY" secondItem="U0Y-tZ-gKs" secondAttribute="centerY" id="Oup-o0-Jil"/>
+                <constraint firstItem="CR4-fu-dor" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Tuy-BO-DMF"/>
+                <constraint firstItem="aeb-PG-i3j" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="hL2-7V-fWv"/>
+                <constraint firstAttribute="trailing" secondItem="U0Y-tZ-gKs" secondAttribute="trailing" constant="5" id="joS-PB-ifG"/>
+                <constraint firstItem="U0Y-tZ-gKs" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="z09-X7-BaQ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="amplitudeLabel" destination="CR4-fu-dor" id="EPG-ZY-0hq"/>
+                <outlet property="frequencyLabel" destination="U0Y-tZ-gKs" id="Yqe-og-Ki9"/>
+                <outlet property="phaseLabel" destination="aeb-PG-i3j" id="CuN-RI-kAG"/>
+            </connections>
+            <point key="canvasLocation" x="-138" y="-27"/>
+        </view>
+    </objects>
+</document>

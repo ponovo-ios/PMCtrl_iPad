@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="BD_IECParamCell3ID" rowHeight="97" id="KGk-i7-Jjw" customClass="BD_IECParamCell3">
+            <rect key="frame" x="0.0" y="0.0" width="418" height="97"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="418" height="96.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B码逻辑:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1HX-HY-EGB">
+                        <rect key="frame" x="10" y="38" width="67.5" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.97500236129999995" green="0.98526554399999999" blue="0.98526554399999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iX1-pZ-k0T">
+                        <rect key="frame" x="116.5" y="36" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="fsI-CZ-rzj"/>
+                            <constraint firstAttribute="width" constant="25" id="hK1-Js-uI3"/>
+                        </constraints>
+                        <state key="normal" image="radioSelected"/>
+                        <connections>
+                            <action selector="cellBtn1Click:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="A3j-xW-JKe"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rhq-FQ-HMT">
+                        <rect key="frame" x="273" y="36" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="33v-fu-TsO"/>
+                            <constraint firstAttribute="width" constant="25" id="sDd-hW-kF6"/>
+                        </constraints>
+                        <state key="normal" image="radioUnSelected"/>
+                        <connections>
+                            <action selector="cellBtn2Click:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="E30-ea-vIt"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RT8-5l-C5X">
+                        <rect key="frame" x="303" y="39.5" width="37.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wh3-bA-Myt">
+                        <rect key="frame" x="146.5" y="39.5" width="37.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" red="0.42608484455958551" green="0.42608484455958551" blue="0.42608484455958551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstItem="RT8-5l-C5X" firstAttribute="leading" secondItem="Rhq-FQ-HMT" secondAttribute="trailing" constant="5" id="0vg-uZ-WVv"/>
+                    <constraint firstAttribute="trailing" secondItem="Rhq-FQ-HMT" secondAttribute="trailing" constant="120" id="2za-3b-qir"/>
+                    <constraint firstItem="1HX-HY-EGB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="HQ2-IL-Ix0"/>
+                    <constraint firstItem="iX1-pZ-k0T" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" constant="-80" id="NQb-0C-0wv"/>
+                    <constraint firstItem="RT8-5l-C5X" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="QJN-LD-7qg"/>
+                    <constraint firstItem="wh3-bA-Myt" firstAttribute="leading" secondItem="iX1-pZ-k0T" secondAttribute="trailing" constant="5" id="aFg-LA-ILz"/>
+                    <constraint firstItem="1HX-HY-EGB" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mHd-2l-qX3"/>
+                    <constraint firstItem="iX1-pZ-k0T" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mvK-Pd-fuR"/>
+                    <constraint firstItem="Rhq-FQ-HMT" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="nvf-N9-F8D"/>
+                    <constraint firstItem="wh3-bA-Myt" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="qgp-O3-ilb"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="cellBtn1" destination="iX1-pZ-k0T" id="wsN-us-Eef"/>
+                <outlet property="cellBtn2" destination="Rhq-FQ-HMT" id="MIg-yH-qru"/>
+                <outlet property="cellTitle" destination="1HX-HY-EGB" id="7Az-eR-v1I"/>
+                <outlet property="cellValue1" destination="wh3-bA-Myt" id="T21-Yb-RCc"/>
+                <outlet property="cellValue2" destination="RT8-5l-C5X" id="tF2-Tr-e1u"/>
+            </connections>
+            <point key="canvasLocation" x="-129" y="-113.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="radioSelected" width="15" height="15"/>
+        <image name="radioUnSelected" width="15" height="15"/>
+    </resources>
+</document>

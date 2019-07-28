@@ -1,0 +1,37 @@
+syntax="proto3";
+import "hqyIECBaseSetting.proto";
+import "hqyIec6185092.proto";
+import "hqyiec6185091.proto";
+import "hqyiec6004478.proto";
+import "hqyiecCollector.proto";
+import "hqyGoosePublish.proto";
+import "hqyGooseSubscribe.proto";
+
+package hqyIECPara;
+
+enum digitalactype
+{
+	digitalactype_smv9_1 = 0;
+	digitalactype_smv9_2 = 1;
+	digitalactype_ft3 = 2;
+	digitalactype_ft3ex = 3;
+	digitalactype_stategrid = 4;
+	digitalactype_xinning = 5;
+	digitalactype_xuji = 6;
+}
+
+message IECPara
+{
+	 hqyIECBaseSetting.BaseSetting obasesetting = 1;
+	 hqyIEC61850_9_2_Setting.IEC61850_9_2 osmv = 2;
+	 hqyIEC61850_9_1_Setting.IEC61850_9_1 osmv_91 = 3;
+         hqyIEC60044_7_8_Setting.IEC60044_7_8 osmv_Ft3StateGrid = 4;
+         hqyIEC60044_7_8_Setting.IEC60044_7_8 osmv_Ft3NR = 5;
+	 hqyIECCollector_Setting.IECCollector ocollector_StateGrid = 6;
+	 hqyIECCollector_Setting.IECCollector ocollector_XinNing = 7;
+	 hqyIECCollector_Setting.IECCollector ocollector_XuJi = 8;
+	 digitalactype oactype = 9;
+	 hqyGoose_Pub_Setting.Goose_Publish ogoosepublish = 10;
+	 hqyGoose_Sub_Setting.Goose_Sub ogoosesub = 11;
+}
+

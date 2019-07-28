@@ -1,0 +1,163 @@
+syntax="proto3";
+
+package StateSequence;
+
+import "VectSetting.proto";
+import "GoosePublish.proto";
+import "GooseFault.proto";
+import "SvAbnormalSimulateSetting.proto";
+import "GooseSubscribe.proto";
+import "DifferentialCurrentCalcSetting.proto";
+import "ShortcutCalcSetting.proto";
+import "DeviceSetting.proto";
+
+
+enum  StateSequenceType
+{
+    STATE_SEQ_4V_3I         = 0;  // 状态序列试验(4V,3I)
+    STATE_SEQ_6V_6I         = 1;  // 状态序列试验(6V,6I)
+    STATE_SEQ_1V_6I         = 2;  // 状态序列试验(1V,6I)
+    STATE_SEQ_6V_1I         = 3;  // 状态序列试验(6V,1I)
+    STATE_SEQ_12V_12I       = 4;  // 状态序列试验(12V,12I)
+}
+
+message Channel
+{
+    VectSetting.ChannelBase   BaseInfo        = 1;
+    VectSetting.HarmonicInfo  Harmonic        = 2;     // 谐波
+    bool                      Overlay         = 3;     
+}  
+
+enum LogicalCombine
+{
+    LC_OR  = 0;
+    LC_AND = 1;
+}
+
+message BinaryItem
+{
+    int32 Channel  = 1;
+    bool  BinValue = 2;
+}
+
+message BinaryInSetting
+{
+    repeated BinaryItem   Item                 = 1; 
+    LogicalCombine        Combine              = 2;   // 逻辑与或者逻辑或
+}
+
+message BinaryOutSetting
+{
+    repeated BinaryItem Item    = 1; 
+    bool     IsKeepAndFlip      = 2;     // 是否保持后再翻转
+    double   KeepTime           = 3;     // 保持时间
+}
+
+message TriggerTimeType
+{
+    int32 year        = 1;
+    int32 month       = 2;
+    int32 day         = 3;
+    int32 hour        = 4;
+    int32 minute      = 5;
+    int32 second      = 6;
+}
+
+enum TriggerEventType
+{
+    TIMING_TRIG                = 0;    // 时间触发
+    TIMING_OR_BINARY_IN_TRIG   = 1;    // 时间触发或者开关输入量触发
+    BINARY_IN_TRIG             = 2;    // 开关输入量触发
+    MANUAL_TRIG                = 3;    // 手动触发
+    GPS_TRIG                   = 4;    // GPS触发
+    LOW_VALUE_TRIG             = 5;    // 低值触发
+}
+
+message TriggerInfo
+{
+    TriggerEventType          Type             = 1;  // 触发条件
+    double                    OutputTime       = 2;  // 输出时间,用于时间触发
+    BinaryInSetting           BinaryIn         = 3;  // 用于输入开关量触发
+    TriggerTimeType           TriggerTime      = 4;  // 用于GPS或者B码触发
+    double                    TriggerValue     = 5;  // 低值触发的值
+    VectSetting.ChannelBase   TrigChannel      = 6;  // 低值触发的通道
+}
+
+enum RecordPhaseDiffType
+{
+    RPD_V_A_B   = 0;       // ∠(Ua-Ub)
+    RPD_V_A_Ap  = 1;       // ∠(Ua-Ua')
+}
+
+message DiffItemInfo
+{
+    double   Step        = 1;
+    double   StopValue   = 2;
+}
+
+message DiffInfo
+{
+    bool                     IsdVdt   = 1;
+    bool                     Isdfdt   = 2;
+    VectSetting.ChannelList  Channels = 3;
+    DiffItemInfo             Volt     = 4;
+    DiffItemInfo             Freq     = 5;
+}
+
+message GradationInfo
+{
+    bool                     IsProgress   = 1;
+    VectSetting.ChannelList  Channels     = 2;
+    double                   Step         = 3;
+    double                   TimeInterval = 4;
+    double                   Stop         = 5;
+}
+
+message ChangeInfo
+{
+    DiffInfo       Diff       = 1;
+    GradationInfo  Gradation  = 2;
+}
+
+//  3（或者4）相的电压通道，以及3相（或者4）相的电流通道，组成一个"向量单元"
+message Vect
+{
+    string                      Name            = 1;   // 本向量的名字，这个将作为关键字,与VectFactorItem中的name字段关联
+    string                      Display         = 2;    
+    repeated Channel            Channels        = 3;   // 具有相同属性的一组电流或者电压通道
+    VectSetting.HarmDisplayInfo HarmDisplay     = 4; // 本组谐波显示配置
+}
+
+message ValueItem
+{
+    double              Vdc   = 1;
+    repeated Vect       Item  = 2;    // 所有通道组的设置
+}
+
+
+
+message StateSeqItem
+{
+    string                                 Name               = 1;
+    bool                                   Selected           = 2;
+    TriggerInfo                            Trigger            = 3;   // 触发条件
+    double                                 TriggerKeepTime    = 4;   // 触发后保持的时间
+    ValueItem                              Data               = 5;   
+    BinaryOutSetting                       BinaryOut          = 6;   // 开入量设置
+    ChangeInfo                             Change             = 7;   // 递变设置
+    GooseFault.GooseFaultInfo              GooseFault         = 8;   // GOOSE报文故障设置
+    Goose_Pub_Setting.Goose_Publish        GoosePub           = 9;   // goose 发送数据集
+    SvAbnormalSimulateSetting.AbnormalInfo Abnormal           = 10;  // SV异常模拟设置
+    VectSetting.EvalInfo                   Eval               = 11;  // 评估设置
+}
+
+message StateSeqInfo
+{
+    StateSequenceType      Type                          = 1;     
+    repeated StateSeqItem  Item                          = 2;
+    DeviceSetting.VdcInfo                  Vdc           = 3;   // vdc的设置
+    ShortcutCalcSetting.ShortcutCalcInfo   ShortcutCalc  = 4;   // 短路计算设置
+    DiffCurCalcSetting.DiffCurCalcInfo     DiffCurCalc   = 5;   // 差流计算设置
+    Goose_Sub_Setting.Goose_Sub            GooseSub      = 6;   // 用于虚端子的测试,增加这个字段的目的是将来会取消iec61850配置，所以这里需要保留一份
+}
+

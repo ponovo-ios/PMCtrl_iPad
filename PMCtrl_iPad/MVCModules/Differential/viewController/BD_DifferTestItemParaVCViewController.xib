@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BD_DifferTestItemParaVCViewController">
+            <connections>
+                <outlet property="actionView" destination="6jA-F9-jws" id="Nc1-ux-MOJ"/>
+                <outlet property="paramSegmentControl" destination="23N-VJ-cg3" id="cW6-d2-8Bq"/>
+                <outlet property="testItemParaView" destination="nya-aJ-GuL" id="T0P-6N-7ea"/>
+                <outlet property="testListTBView" destination="Hmm-lf-VOI" id="yf8-0G-PzX"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Hmm-lf-VOI">
+                    <rect key="frame" x="0.0" y="5" width="407" height="95"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6jA-F9-jws">
+                    <rect key="frame" x="417" y="5" width="250" height="95"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="250" id="On2-VF-H1a"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dDn-xs-whX">
+                    <rect key="frame" x="0.0" y="110" width="667" height="265"/>
+                    <subviews>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nya-aJ-GuL">
+                            <rect key="frame" x="0.0" y="38.5" width="667" height="226.5"/>
+                        </scrollView>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="23N-VJ-cg3">
+                            <rect key="frame" x="5" y="5" width="657" height="29"/>
+                            <segments>
+                                <segment title="试验参数"/>
+                                <segment title="试验结果及评估"/>
+                                <segment title="GOOSE数据发送"/>
+                            </segments>
+                            <color key="tintColor" red="0.36557123060000002" green="0.72712492939999995" blue="0.78435260060000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="paramViewChanged:" destination="-1" eventType="valueChanged" id="ObA-cL-mBx"/>
+                            </connections>
+                        </segmentedControl>
+                    </subviews>
+                    <color key="backgroundColor" red="0.25114917755126953" green="0.24685905873775482" blue="0.25500258803367615" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstItem="23N-VJ-cg3" firstAttribute="leading" secondItem="dDn-xs-whX" secondAttribute="leading" constant="5" id="3A7-lx-2oo"/>
+                        <constraint firstAttribute="bottom" secondItem="nya-aJ-GuL" secondAttribute="bottom" id="562-on-MjA"/>
+                        <constraint firstItem="nya-aJ-GuL" firstAttribute="leading" secondItem="dDn-xs-whX" secondAttribute="leading" id="PlR-Zu-Dk9"/>
+                        <constraint firstAttribute="trailing" secondItem="23N-VJ-cg3" secondAttribute="trailing" constant="5" id="SC6-bn-env"/>
+                        <constraint firstItem="23N-VJ-cg3" firstAttribute="top" secondItem="dDn-xs-whX" secondAttribute="top" constant="5" id="htG-BK-yhb"/>
+                        <constraint firstAttribute="trailing" secondItem="nya-aJ-GuL" secondAttribute="trailing" id="mhq-S2-Mbi"/>
+                        <constraint firstItem="nya-aJ-GuL" firstAttribute="top" secondItem="23N-VJ-cg3" secondAttribute="bottom" constant="5" id="ovg-3h-A9W"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="dDn-xs-whX" secondAttribute="bottom" id="2F5-51-Plw"/>
+                <constraint firstItem="dDn-xs-whX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3ih-Q2-mfo"/>
+                <constraint firstItem="6jA-F9-jws" firstAttribute="height" secondItem="Hmm-lf-VOI" secondAttribute="height" id="CRt-az-I9q"/>
+                <constraint firstItem="6jA-F9-jws" firstAttribute="leading" secondItem="Hmm-lf-VOI" secondAttribute="trailing" constant="10" id="Ix0-2I-0It"/>
+                <constraint firstItem="6jA-F9-jws" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="5" id="NCU-nA-7qp"/>
+                <constraint firstItem="Hmm-lf-VOI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="TZC-8G-fI9"/>
+                <constraint firstItem="dDn-xs-whX" firstAttribute="height" secondItem="Hmm-lf-VOI" secondAttribute="height" constant="170" id="cGS-cm-dWI"/>
+                <constraint firstItem="dDn-xs-whX" firstAttribute="top" secondItem="Hmm-lf-VOI" secondAttribute="bottom" constant="10" id="gSF-qe-2jC"/>
+                <constraint firstAttribute="trailing" secondItem="6jA-F9-jws" secondAttribute="trailing" id="jf6-i9-Iib"/>
+                <constraint firstItem="Hmm-lf-VOI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="5" id="spB-2X-FjB"/>
+                <constraint firstAttribute="trailing" secondItem="dDn-xs-whX" secondAttribute="trailing" id="uDY-Sg-g16"/>
+            </constraints>
+            <point key="canvasLocation" x="-62" y="9"/>
+        </view>
+    </objects>
+</document>

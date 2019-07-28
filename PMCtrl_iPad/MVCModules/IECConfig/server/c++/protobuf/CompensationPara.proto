@@ -1,0 +1,38 @@
+   syntax="proto3";
+
+package Compensation;
+
+message CompensationItem
+{
+
+        float fampcompensation = 1;//幅值
+        float fphcompensation = 2;//相位
+}
+
+
+message ChanelCompensation
+{
+     float fzeroshift = 1;//零漂
+     repeated CompensationItem oharms = 2;//谐波 1-50
+     repeated float fTempXs =3;//温区，最大20个
+     float fdczeroshft = 4;//DC zero
+}
+
+
+message module
+{
+        repeated ChanelCompensation chanelItem =1;//通道总共6个
+        uint32 nmodule = 2;//module index
+        string filename = 3;
+        float frexs = 4;//频率
+}
+
+message modules
+{
+
+    repeated module moduleChanel = 1;// 4 ,2for current
+
+}
+
+
+

@@ -1,0 +1,43 @@
+syntax="proto3";
+
+package DeviceInnerPara;
+
+message DeviceInnerSetting
+{
+    AmplifierVolt oAmplifierVolt = 2;
+    uint32 nModule  = 3;
+}
+
+message ModuleInfo
+{
+    repeated DeviceInnerSetting oInnerSetting = 1;//max 4
+}
+
+message DASettings
+{
+    repeated DASetting odas = 1;
+}
+
+message DASetting
+{
+        repeated float fVolt = 1;//4 volt DA setting value
+}
+
+message AmplifierVolt
+{
+    repeated float fVoltMax = 1;//6 volt amplifier monitor volt;
+    repeated float fVoltMin = 2;//6 monitor volt;
+    repeated float fVoltDc = 3;//6 monitor volt;
+    repeated uint32 bVoltOverLoad = 4;//6 amplifier overload
+    repeated uint32 nTemp = 5;//3 templature;
+    uint32 nVoltOverHot = 6;//volt amplifier overhot;
+    uint32 bDCOverHot = 7;//current amplifier overhot;
+    uint32 voltwarining = 8;
+    uint32 misswarining = 9;
+
+}
+
+
+
+
+

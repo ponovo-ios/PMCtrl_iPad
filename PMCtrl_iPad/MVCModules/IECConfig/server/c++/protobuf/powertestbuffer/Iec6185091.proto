@@ -1,0 +1,59 @@
+syntax="proto3";
+import "VectSetting.proto";
+import "WeakSignal.proto";
+
+package IEC61850_9_1_Setting;
+
+enum Channel_Type
+{
+   FOR_PROTECT = 0;
+   FOR_MEASURE = 1;
+   FOR_VOLTAGE = 2;
+}
+
+message Channel_Info
+{
+     string       Name           = 1;   // 用户编写的通道名称
+     string       Description    = 2;   // SCD文件中读取的通道名称
+     string       MapChannel     = 3;
+     Channel_Type Type           = 4;
+}
+
+message Control_Block
+{
+     string DstMac                     = 1;      // 目的MAC地址
+     string SrcMac                     = 2;      // 源MAC地址
+     uint32 APPID                      = 3;      // APPID
+     uint32 LDName                     = 4;
+     uint32 DataSetName                = 5;
+     int32  VLAN_ID                    = 6;
+     int32  VLAN_Priority              = 7;
+     uint32 StateFlag1                 = 8;       // 状态字1
+     uint32 StateFlag2                 = 9;       // 状态字2
+     uint32 RatedDelayTime             = 10;      // 额定延时，单位微秒
+     uint32 ConfRev                    = 11;	  // 配置版本号
+     int32  Port                       = 12;	  // 发送端口号，第一个端口号为0， -1表示不发送
+     string Description                = 13;
+     repeated Channel_Info  Channel    = 14;      // 通道列表
+     bool   IsOutput                   = 15;      //控制块是否选中
+}
+
+message IEC61850_9_1
+{
+     repeated Control_Block        Block                   = 1;
+     int32                         SamplingRatio           = 2;    // 采样率
+     int32                         ASDUCount               = 3;    // ASDU
+     int32                         SCP                     = 4;
+     int32                         SCM                     = 5;
+     int32                         SV                      = 6;
+     double                        RatedPhaseVolFactor     = 7;    // 额定相电压传输系数
+     double                        RatedProtectCurrent     = 8;    // 额定保护电流,单位:安培A
+     double                        RatedZeroSeqCurrent     = 9;    // 额定零序电流,单位:安培A
+     double                        RatedPhaseVoltage       = 10;   // 额定相电压,1/10KV 为单位
+     Weak_Signal_setting.Weak_signal_Field Weak            = 11;
+     bool                          OutputIsPrimary         = 12;
+     VectSetting.ChannelList       MapChannelList          = 13; 
+
+}
+
+

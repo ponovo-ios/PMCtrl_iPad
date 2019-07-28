@@ -1,0 +1,295 @@
+syntax="proto3";
+
+package Differential;
+//测试类型
+enum TestItem_type
+{
+	QDCurrent = 0;//启动电流
+  ZDRatio = 1;// 比率制动
+  SDCurrent = 2;//速断电流
+  HarmonicRation = 3;//2次谐波制动系数
+  ActionTime = 4;// 动作时间
+  Other=5;  //其他
+  
+}
+//测试相
+enum TestPhasor_type
+{
+   APhase = 0;//A相
+   BPhase = 1;//B相
+   CPhase = 2;//C相
+   ABCPhase = 3;//ABC相
+}
+message chanel
+{
+	float famptitude = 1;//幅值
+	float fphase = 2;//相位
+}
+message BasicResultItem
+{
+	chanel Ia=1;
+	chanel Ib=2;
+	chanel Ic=3;
+	chanel Iap=4;
+	chanel Ibp=5;
+	chanel Icp=6;
+}
+//启动 速断 其他
+message TestItem_QDCurrent
+{
+  TestItem_type itemtype = 1;//类型
+  uint32 iIndex = 2;
+	float  Ir = 3;//制动电流
+	float  fUp=4; //上限
+	float  fDown=5; //下限  
+}
+//启动 速断 返回结果
+message TestItem_QDCurrent_Result
+{
+	TestItem_type itemtype = 1;//类型
+	uint32 iIndex = 2;
+	BasicResultItem basic =3;
+	float Id=4; //差动电流
+	bool bEnd=5; //是否最后一个点 是 ture 否 false
+        uint32 nibinstate=7; //开入量
+}
+
+//比率制动
+message TestItem_ZDRatio
+{
+	TestItem_type itemtype = 1;//项目类型
+	uint32 iTypeIndex= 2;   //区分比率制动1 1-2 2 2-2 3 3-2 值：1 2 3 4 5 6
+	uint32 iIndex = 3;
+	float  Ir = 4;//制动电流
+	float  fUp=5; //上限
+	float  fDown=6; //下限  
+}
+//比率制动返回结果
+message TestItem_ZDRatio_Result
+{
+	TestItem_type itemtype = 1;//项目类型
+	uint32 iTypeIndex= 2;   //区分比率制动1 1-2 2 2-2 3 3-2 值：1 2 3 4 5 6
+	uint32 iIndex = 3;
+	BasicResultItem basic =4;
+	float  Id = 5;//差动电流
+	bool bEnd=6; //是否最后一个点 是 ture 否 false
+        uint32 nibinstate=7; //开入量
+}
+//谐波制动
+message HarmonicRatio
+{
+  TestItem_type itemtype = 1;//项目类型
+  uint32 iIndex = 2;
+	float  Id = 3;//差动电流
+	uint32  nHam  = 4;//谐波次数
+}
+//谐波制动返回结果
+message HarmonicRatio_Result
+{
+	TestItem_type itemtype = 1;//项目类型
+	uint32 iIndex = 2;
+	BasicResultItem basic =3; 
+	float  Ir = 4;//制动电流
+	float  K = 5; //制动系数
+	bool bEnd=6; //是否最后一个点 是 ture 否 false
+        uint32 nibinstate=7; //开入量
+}
+
+//动作时间
+message TestItem_ActionTime
+{
+  TestItem_type itemtype = 1;//类型
+  uint32 iIndex = 2;
+	float  Id = 3;//差动电流
+	float  Ir = 4;//制动电流   
+}
+//动作时间返回结果
+message TestItem_ActionTime_Result
+{
+	TestItem_type itemtype = 1;//类型
+	uint32 iIndex = 2;
+	BasicResultItem basic =3;
+	float fId=4;    //差动电流
+	float ftime=5;  //动作时间
+	bool bEnd=6; //是否最后一个点 是 ture 否 false
+        uint32 nibinstate=7; //开入量
+}
+message testItem
+{
+   TestItem_type itemtype = 1;
+   TestItem_QDCurrent oQdcurrent = 2;
+   TestItem_ActionTime oActionTime = 3;
+   TestItem_ZDRatio oZDRatio = 4;
+   HarmonicRatio oHarmnonicRatio = 5;
+   
+}
+
+message testItem_Result
+{
+	 TestItem_type itemtype = 1;
+   TestItem_QDCurrent_Result oQdRes = 2;
+   TestItem_ZDRatio_Result oZdRes = 3;
+   HarmonicRatio_Result oHarmRes = 4;
+   TestItem_ActionTime_Result oActionRes = 5;
+   
+}
+
+enum OutPutType	//输出类型
+{
+        analog_type = 0;//模拟量类型
+        digital_type =1;//数字量类型
+        analog_digital_type = 2;//数字量+模拟量
+}
+
+message Items
+{
+	CommonPara oComm = 1;  //通用参数
+	SwitchPara oSwitch = 2;  //开关量
+	ProtectSetting oProtectSet = 3;  //整定值参数
+	repeated testItem oItems = 4;    //下发的实验参数列表
+         OutPutType outputType = 5;//输出类型
+}
+
+//各平衡系数计算方式，手动或自动
+enum Kcal_Type
+{
+  AutoCaculate = 0;
+  ManualCaculate = 1;
+}
+//接线方式
+enum Connection_Type
+{
+  StarType = 0;
+  TriangleType = 1;
+}
+//校正选择 
+enum Correct_Type
+{
+   NONE_TYPE = 0;
+   Correct_Trigangel_Type  = 1;
+   Correct_Start_Type = 2;
+}
+//测试绕组
+enum TestWind_Type
+{
+	TestWind_HightToLow = 0;
+	TestWind_HightToMin = 1;
+	TestWind_MinToLow = 2;
+}
+
+//搜索方法
+enum Search_Type
+{
+	Search_Type_Search_Type = 0;
+	Search_Type_Single = 1;
+
+}
+
+//CT极性
+enum CTPolar_Type
+{
+	TwoSide_Type = 0;
+	OneSide_type = 1;
+
+}
+
+//通用参数
+message CommonPara
+{
+	 float ED_V =1; //额定线电压
+	 float ED_I = 2; //额定电流
+	 float ED_Hz = 3; //额定频率
+	 float PreTime = 4;//准备时间
+   float PrefaultTime  = 5;//故障前时间
+	 float FaultTime = 6;//故障时间
+	 uint32 BalanceParaCacuType = 7;
+	 float SN = 8;//
+	 float Uh = 9;//
+	 float Um = 10;//
+	 float Ul = 11;//
+	 float CTPh = 12;//
+	 float CTPm = 13;//
+	 float CTPl = 14;//
+	 float CTSh = 15;//
+	 float CTSm = 16;//
+	 float CTSl = 17;//
+	 float Kph = 18;//
+	 float Kpm = 19;//
+	 float Kpl = 20;//
+	 Connection_Type WindH = 21;//
+	 Connection_Type WindM = 22;//
+	 Connection_Type WindL = 23;//
+	 Correct_Type AngleMode = 24;//连接类型
+	 TestWind_Type WindSide = 25;//测试绕组
+	 uint32 ConnMode = 26;//测试绕组之间角差 0 to 11
+	 uint32 JXFactor  = 27;//平衡系数计算是否考虑接线形式
+	 Search_Type SerachMode = 28;//搜索方法
+	 CTPolar_Type IdEqu = 29;//CT极性
+	 uint32 Equation = 30;//制动方程
+	 float K1 = 31;
+	 float K2 = 32;
+	 TestPhasor_type Phase_Type = 33;
+	 float Reso = 34;
+	 float Uz = 35;
+}
+
+//整定值
+enum SettingType
+{
+	RealValue_type = 0;
+	MarkValue_Type = 1;
+
+}
+
+enum BaseCurrentSelect
+{
+   HighSideSecondaryCurrent = 0;
+   SettingValue = 1;
+   AllSideCurrent = 2;
+}
+
+
+message ProtectSetting
+{
+	SettingType Axis = 1;//定值整定方式
+	BaseCurrentSelect Insel = 2;//基准电流选择
+	float  Inom = 3;
+	float  Isd = 4;
+	float  Icdqd = 5;
+	uint32 KneePoint = 6;//拐点个数
+	float Ip1 = 7;//比率制动特性拐点1电流
+	float Ip2 = 8;//比率制动特性拐点1电流
+	float Ip3 = 9;//比率制动特性拐点1电流
+	float Kid1 = 10;//启动电流斜率
+	float Kid2 = 11;//基波比率制动特性斜率1
+	float Kid3 = 12;//速断电流斜率
+	float Kid4 = 13;//速断电流斜率
+	float Kxb = 14;//二次谐波制动系数
+	float Kxb3 = 15;//三次谐波制动系数
+	float Kxb5 = 16;//5次谐波制动系数
+}
+
+//开关量参数
+message SwitchPara
+{
+	uint32 iKA = 1;         //0:开放 1：闭锁
+	uint32 iKB = 2;         
+	uint32 iKC = 3;					
+	uint32 iKD = 4;         
+	uint32 iKE = 5;         
+	uint32 iKF = 6;         
+	uint32 iKG = 7;         
+	uint32 iKH = 8;
+	uint32 iKI = 9;  
+	uint32 iKJ = 10;           
+	uint32 iLogic = 11;     //0: 逻辑或 逻辑与
+	uint32 iOut1 = 12;         //0:打开 1关闭
+	uint32 iOut2 = 13;         //0:打开 1关闭
+	uint32 iOut3 = 14;         //0:打开 1关闭
+	uint32 iOut4 = 15;         //0:打开 1关闭
+	uint32 iOut5 = 16;         //0:打开 1关闭
+	uint32 iOut6 = 17;         //0:打开 1关闭
+	uint32 iOut7 = 18;         //0:打开 1关闭
+	uint32 iOut8 = 19;         //0:打开 1关闭
+	
+}

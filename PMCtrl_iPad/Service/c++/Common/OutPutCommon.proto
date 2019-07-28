@@ -1,0 +1,139 @@
+﻿syntax="proto3";
+
+package OutPutCommon;
+
+
+enum para_type
+{
+  va1_type = 0;
+  vb1_type = 1;
+  vc1_type = 2;
+  vab1_type = 4;
+  vbc1_type = 5;
+  vca1_type = 6;
+  vabc1_type = 7;
+  va2_type = 8;
+  vb2_type = 9;
+  vc2_type = 10;
+  vabc2_type = 11;
+  ia1_type = 12;
+  ib1_type = 13;
+  ic1_type = 14;
+  iab1_type = 15;
+  ibc1_type = 16;
+  ica1_type = 17;
+  iabc1_type = 18;
+  ia2_type = 19;
+  ib2_type = 20;
+  ic2_type = 21;
+  iabc2_type = 22;
+  vall_type= 23;
+  iall_type = 24;
+  vdc_type = 25;
+  vz_type=26;
+  vab2_type = 27;
+  vbc2_type = 28;
+  vca2_type = 29;
+  iab2_type = 30;
+  ibc2_type = 31;
+  ica2_type = 32;
+  iabcAdd_type = 33;
+  ia2b2c2Add_type =34;  //a2+b2+c2
+  vabcAdd_type= 35;
+  va2b2c2Add_type = 36;  //va2+vb2+vc2
+  freAll_type = 37;
+}
+enum changed_type
+{
+    amplitude_type = 0;
+    phasor_type = 1;
+    fre_type = 2;
+}
+
+message GradientPara
+{
+        OutPutCommon.para_type iVar=1;     //模拟变量
+        OutPutCommon.changed_type iType=2;    //模拟变量类型
+        float fStep=3;     //模拟变量步长
+        float fStepTime=4; //模拟变量变化时间
+        float fStart=5;    //模拟变量变化初值
+        float fEnd=6;			//模拟变量变化终值
+        uint32 nHarm = 7;//0 base ,1:100Hz
+}
+
+message chanelpara
+{
+	 float famptitude = 1;//幅值
+	 float fphase = 2;//相位
+	 float ffre = 3;//频率
+}
+
+message acanalogpara
+{
+        repeated chanelpara analogcurrentchanelvalue = 1;//电流模拟量通道 
+        repeated chanelpara analogvoltchangelvalue = 2;//模拟量电压通道值
+}
+
+message resultItem
+{
+    uint32 nType = 1;					//结果类型，
+//1：开始实验	2：实验结束	3：状态切换	4：开入变位 5: 递变
+    uint32 nSource = 2;			//当type为开入变位，为变位的开入通道，bit9~bit0对应开入9~0
+                                //当type为状态切换时，为状态切换触发条件，
+                                //bit12:手动触发	bit11：时间触发	bit10：GPS触发
+                                //bit9~bit0:对应开关量9~0
+    uint32 nSec = 3;						//产生结果的时间秒值
+    uint32 nNanoSec = 4;					//产生结果的时间纳秒值
+    uint32 nInput = 5;					//产生结果时开入量的值
+    uint32 nGooseValue = 6;               //
+    uint32 currentIndex = 7;				//当前状态索引号
+    uint32 nObjective = 8;				//要跳转的状态索引号
+    uint32 nStep = 9;
+    uint32 nOutBinary = 10;
+
+}
+message result
+{
+    repeated resultItem oreslult = 1;
+}
+
+message deviceinfo
+{
+    //1 断开，0闭合
+    uint32 ncurrentinfo = 1;//bit: 0-5 电流开路，6 过热
+    uint32 nvoltinfo = 2;//bit:0-5 电压短路  6-11 过载 12 过热
+}
+
+message gpstime
+{
+    uint32 nsecond = 1; //秒
+    uint32 nNanoSec = 2; //纳秒
+}
+
+message realdata
+{
+     acanalogpara oacanalogpara = 1;
+     acanalogpara oacdigitalpara = 2;
+     bool bgradient = 3;
+}
+
+message realdatapos
+{
+     acanalogpara oacanalogpara = 1;
+     acanalogpara oacdigitalpara = 2;
+     uint32 nBo = 3;
+     uint32 nBi = 4;
+     uint32 nusecond = 5;
+}
+
+message realdataposes
+{
+    repeated realdatapos datas = 1;
+}
+
+message SwitchPara
+{
+        uint32 iInPut = 1;
+        uint32 iLogic = 2;     //0: 逻辑或 1逻辑与
+        uint32 iOutPut =3;
+}

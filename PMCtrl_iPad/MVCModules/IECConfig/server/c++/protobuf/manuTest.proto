@@ -1,0 +1,57 @@
+﻿syntax="proto3";
+
+import "OutPutCommon.proto";
+package ManuTestPara;
+
+
+//开关量参数
+message SwitchPara
+{
+
+	uint32 iInPut = 1;           
+	uint32 iLogic = 2;     //0: 逻辑或 逻辑与
+        uint32 iOutPut =3;
+
+}
+message CommonPara
+{
+	 float fTrigDelay=1;  //触发延时
+   bool bAgingTest=2;   //老化试验
+   bool bDcTest=3;     //直流试验
+   bool bAutoTest=4;   //自动试验
+   bool bLock=5;       //是否锁定
+	 uint32 iTestType = 6;//0：始值-终值  1 始值-终值-始值
+}
+
+
+
+
+message TestItem
+{
+ 	 CommonPara oCommonPara=1;
+         OutPutCommon.acanalogpara oacanlogpara =2;
+   OutPutCommon.acanalogpara oacdigitalpara =3;
+         OutPutCommon.GradientPara oanaGradientpara =4;   //模拟递变参数
+         OutPutCommon.GradientPara odigGradientpara =5;   //数字递变参数
+   SwitchPara oswitchpara =6;
+}
+
+message TestItemResult
+{
+
+         float fActValue=1;
+         uint32 fActTime=2;  //毫秒
+         float fReturnValue = 3;//返回值
+         uint32 fReturnTime = 4;//返回时间
+}
+
+message realPara
+{
+    OutPutCommon.acanalogpara oacanlogpara =1;
+    OutPutCommon.acanalogpara oacdigitalpara =2;
+}
+
+message TestItem_Switch_State
+{
+	uint32 nibinstate=1; //开入量
+}

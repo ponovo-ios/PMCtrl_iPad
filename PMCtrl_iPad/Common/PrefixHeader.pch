@@ -1,0 +1,39 @@
+//
+//  PrefixHeader.pch
+//  PMCtrl_iOS
+//
+//  Created by justin on 17/5/24.
+//  Copyright © 2017年 wgx. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#ifdef __OBJC__
+
+#import "UIView+GX_Extension.h"
+#import "Masonry.h"
+#import "OCCenter.h"
+#import "BD_DeviceInfoService.h"
+#import "BD_Utils.h"
+#import "BD_PMCtrlSingleton.h"
+#import "FileUtil.h"
+#import "MBProgressHUDUtil.h"
+#import "BD_Constants.h"
+#import "BD_BaseVC.h"
+#import "BD_BaseNavigationVC.h"
+#import "UIView+Extension.h"
+#import "MBProgressHUD+Add.h"
+#import "BD_IECContents.h"
+#import "BD_RemindingMessageMacro_h.h"
+#import "BD_EnumCollection.h"
+#import "NSString+Category.h"
+#import "BD_PMCtrlCharacterManager.h"
+#endif
+
+
+#endif /* PrefixHeader_pch */
+

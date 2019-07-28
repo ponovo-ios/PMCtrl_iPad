@@ -1,0 +1,147 @@
+syntax="proto3";
+
+package SvAbnormalSimulateSetting;
+
+enum  AbnormalType
+{
+    AT_LOST_FRAME                     = 0;  // 丢帧
+    AT_DATA_DISORDER                  = 1;  // 数据异常（飞点）
+    AT_SEQ_DISORDER                   = 2;  // 序号跳变
+    AT_MULT_PACKET_SEQ_OFFSET_ERROR   = 3;  // 多个采样值报文序号偏差测试
+    AT_LOST_SYNC                      = 4;  // 失步测试
+    AT_PACKET_DELAY_ERROR             = 5;  // 报文输出抖动
+    AT_INVALID_QUALITY                = 6;  // 品质无效
+    AT_SV_QUALITY_FLAG                = 7;  // QUALITY状态  
+    AT_SV_TEST_FLAG                   = 8;  // SV检修状态
+
+}
+
+enum  PackDelayType
+{
+    UNIDIRECTIONAL_COMMON             = 0;  // 单向
+    UNIDIRECTIONAL_ALSTOM             = 1;  // 单向（Alstom）
+    BIDIRECTIONAL_ALSTOM              = 2;  // 双向（Alstom）
+}
+
+
+message DataDisorderChannel   // 数据异常（飞点）相选择
+{
+    bool      Selected    = 1;
+    string    VectName    = 2;
+    string    Name        = 3;
+    string    Display     = 4;     
+    int32     Num         = 5; 
+}
+
+message FlagInvalidChannel
+{
+    int32 Index      = 1;
+    bool  Selected   = 2;
+}
+
+enum  SVDurationType
+{
+    PER_CYCLE_TIME              = 0;  // 每周波的时间
+    PER_SECOND                  = 1;  // 每秒钟
+    PER_MINUTES                 = 2;  // 每分钟
+    PER_HOUR                    = 3;  // 每小时
+    PER_DAY                     = 4;  // 每天
+}
+
+message SendPeriodInfo    // 异常发送频率设置
+{
+    SVDurationType   type               = 1;  // 周期
+    double           TimeDuration       = 2;  // 发送的持续时间
+    int32            AbnormalCycleCount = 3;  // 周期时间内发送的异常周波数
+}
+
+message LostFrameInfo         // 丢帧测试
+{
+    int32             Port        = 1;   // 光口选择
+    SendPeriodInfo    Period      = 2;   // 异常数据发送周期规律
+}
+
+message DataDisorderInfo      // 数据异常(飞点)测试
+{
+    repeated DataDisorderChannel item = 1;   // 数据异常通道列表
+    SendPeriodInfo  Period            = 2;   // 异常数据发送周期规律
+}
+
+message SeqDisorderInfo       // 序号跳变测试
+{
+    int32             SeqOffset   = 1;   // 跳变值 
+    int32             Port        = 2;   // 光口选择
+    SendPeriodInfo    Period      = 3;   // 异常数据发送周期规律
+}
+
+message MultPackSeqOffsetInfo  // 多个采样值报文序号偏差测试
+{
+   int32    SeqOffset   = 1;
+}
+
+message LostSyncInfo           // 失步测试
+{
+    int32             APPID       = 1;   // 报文组选择
+    SendPeriodInfo    Period      = 2;   // 异常数据发送周期规律
+}
+
+message PackDelayErrorInfo    // 报文输出抖动设置
+{
+    int32            DelayTime    = 1;
+    PackDelayType    Type         = 2;
+    SendPeriodInfo   Period       = 3;   // 异常数据发送周期规律
+}
+
+message QualityFlagErrorInfo    // 品质无效设置
+{
+    int32                       APPID    = 1;   // 报文组选择
+    repeated FlagInvalidChannel item     = 2;
+    SendPeriodInfo              Period   = 3;   // 异常数据发送周期规律
+}
+
+message TestFlagErrorInfo    // 检修状态设置
+{
+    int32                       APPID           = 1;   // 报文组选择
+    repeated FlagInvalidChannel item            = 2;
+    SendPeriodInfo              Period          = 3;   // 异常数据发送周期规律
+}
+
+
+message AbnormalPoint
+{
+    int32     Id              = 1;        // seq id
+    bool      LostFrame       = 2;        // 丢帧
+    bool      DataDisorder    = 3;        // 飞点
+    bool      SeqDisorder     = 4;        // 跳变
+    bool      LostSync        = 5;        // 失步
+    bool      PackDelayError  = 6;        // 抖动
+    bool      QualityFlag     = 7;        // 品质无效
+    bool      TestFlag        = 8;        // 检修状态异常
+    double    VoltDisorder    = 9;
+    double    CurDisorder     = 10;
+}
+
+message AbnormalPointConfig
+{
+    int32                   CycleFrameCount   = 1;  // 每周波的帧数
+    repeated AbnormalPoint  Points            = 2;  
+}
+
+message AbnormalInfo
+{
+    bool                    IsAbnormal        = 1;
+    AbnormalType            Type              = 2;
+    int32                   MaxChannelCount   = 3;
+    AbnormalPointConfig     PointConfig       = 4;
+    LostFrameInfo           LostFrame         = 5;   // 丢帧测试
+    DataDisorderInfo        DataDisorder      = 6;  // 数据异常（飞点）测试
+    SeqDisorderInfo         SeqDisorder       = 7;   // 序号跳变测试
+    MultPackSeqOffsetInfo   MultPackSeqOffset = 8;   // 多个采样值报文序号偏差测试
+    LostSyncInfo            LostSync          = 9;   // 失步测试
+    PackDelayErrorInfo      PackDelayError    = 10;   // 报文输出抖动
+    QualityFlagErrorInfo    QualityFlag       = 11;  // 品质无效状态异常
+    TestFlagErrorInfo       TestFlag          = 12;  // SV检修状态异常
+    
+}
+                                                            
+

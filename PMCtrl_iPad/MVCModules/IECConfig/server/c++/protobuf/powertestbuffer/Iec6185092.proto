@@ -1,0 +1,87 @@
+syntax="proto3";
+
+import "WeakSignal.proto";
+import "VectSetting.proto";
+
+package IEC61850_9_2_Setting;
+
+message FactorItem
+{
+     string Name    = 1;
+     double Volt    = 2;
+     double Current = 3;
+}
+
+message FactorInfo
+{
+    repeated FactorItem Scale = 1;   // 数字通道的比例因子
+}
+
+enum SyncMode
+{
+   NO_SYNC_MODE      = 0;          // 不同步
+   LOCAL_SYNC_MODE   = 1;          // 本地同步
+   GLOBAL_SYNC_MODE  = 2;          // 全局同步
+}
+
+message Channel_Info
+{
+     string  Name           = 1;   //用户编写的通道名称
+     string  Description    = 2;   //SCD文件中读取的通道名称
+     string  MapChannel     = 3;
+     uint32  HighWord       = 4;
+     uint32  LowWord        = 5;
+}
+
+message Control_Block
+{
+     string SrcMAC                     = 1;   // MAC源地址
+     string DestMac                    = 2;   // MAC目标地址
+     string SVID                       = 3;   // sampled value ID
+     int32  APPID                      = 4;   
+     int32  VLAN_ID                    = 5;   // VLAN ID
+     int32  VLAN_Priority              = 6;   // VLAN Priority
+     SyncMode Sync                     = 7;   // 同步方式
+     string DataSet                    = 8;   // DataSet
+     int32  VerNo                      = 9;   // 版本号
+     int32  Port                       = 10;  // 发送端口号，第一个端口号为0， -1表示不发送
+     bool   IsOutput                   = 11;
+     int32  SamplingDelayTime          = 12;  // 采样延时，单位微秒
+     int32  SwitchDelayTime            = 13;  // 交换机延时，单位纳秒
+     uint32 SwitchQuality              = 14;  // 交换机品质
+     string desc                       = 15;
+     string IedName                    = 16;
+     repeated Channel_Info Channel     = 17;
+}
+
+message IEC61850_9_2
+{
+    repeated Control_Block  Block              = 3;
+    int32            SamplingRatio             = 4;   // 采样率
+    int32            ASDUCount                 = 5;   // ASDU
+    bool             NoQualityFlag             = 6;   // 不含品质位 
+    FactorInfo       Factor                    = 7;   // 数字通道的比例因子
+    bool             OutputIsPrimary           = 8;
+    bool             Security                  = 9;
+    bool             DataSet                   = 10;
+    bool             RefrTm                    = 11;
+    bool             SmpRate                   = 12;
+    Weak_Signal_setting.Weak_signal_Field Weak = 13;
+    VectSetting.ChannelList MapChannelList     = 14; 
+}
+
+message IEC61850_9_2LE
+{
+    repeated Control_Block Block               = 1;
+    int32                  SamplingRatio       = 2;    // 采样率
+    int32                  ASDUCount           = 3;    // ASDU
+    bool                   NoQualityFlag       = 4;    // 不含品质位 
+    FactorInfo             Factor              = 5;    // 数字通道的比例因子
+    bool                   OutputIsPrimary     = 6;
+    Weak_Signal_setting.Weak_signal_Field Weak = 7;
+    VectSetting.ChannelList MapChannelList     = 8; 
+}
+
+
+
+

@@ -1,0 +1,17 @@
+syntax="proto3";
+
+package Project;
+
+import "DeviceType.proto";
+
+message solutionInfo
+{
+    DeviceTypeSetting.DevType      device     = 1;  
+    DeviceTypeSetting.ModuleInfo   projects   = 2;   
+}
+
+message TestItem
+{
+    solutionInfo  solution     = 1;  
+    int32         Index        = 2;
+}

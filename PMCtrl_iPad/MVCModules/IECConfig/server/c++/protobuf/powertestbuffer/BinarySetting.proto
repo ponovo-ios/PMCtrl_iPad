@@ -1,0 +1,68 @@
+syntax="proto3";
+
+package BinarySetting;
+
+enum  BinaryLogical
+{
+    BL_NO_USE           = 0;  // 未使用
+    BL_START            = 1;  // 启动
+    BL_TRIP             = 2;  // 跳闸
+    BL_BREAK_PHASE_A    = 3;  // 跳A相
+    BL_BREAK_PHASE_B    = 4;  // 跳B相
+    BL_BREAK_PHASE_C    = 5;  // 跳C相
+    BL_SIGNAL_1         = 6;  // 信号1
+    BL_SIGNAL_2         = 7;  // 信号2
+    BL_SIGNAL_3         = 8;  // 信号3
+    BL_SIGNAL_4         = 9;  // 信号4
+    BL_SIGNAL_5         = 10; // 信号5
+    BL_SIGNAL_6         = 11; // 信号6
+    BL_SIGNAL_7         = 12; // 信号7
+    BL_SIGNAL_8         = 13; // 信号8
+}
+
+enum LogicalCombine
+{
+    LC_OR  = 0;
+    LC_AND = 1;
+}
+
+message BinaryInItem
+{
+    BinaryLogical logical = 1;
+    int32         Channel = 2;
+}
+
+message BinaryInSetting
+{
+    repeated BinaryInItem Item                 = 1; 
+    LogicalCombine        Combine              = 2;   // 逻辑与或者逻辑或
+    bool                  IsTriggerByCurdistor = 3;   // 是否电流失真触发
+}
+
+message BinaryOutItem
+{
+    int32 Channel  = 1;
+    bool  PreValue = 2;      // 故障前状态开出量
+    bool  CurValue = 3;      // 故障态开出量
+}
+
+message BinaryOutSetting
+{
+    repeated BinaryOutItem Item = 1; 
+    bool     IsKeepAndFlip      = 2;     // 是否保持后再翻转
+    double   KeepTime           = 3;     // 保持时间
+}
+
+message BinaryInfo
+{
+    BinaryInSetting  BinaryIn  = 1;
+    BinaryOutSetting BinaryOut = 2;
+}
+
+
+
+
+
+                                                            
+
+

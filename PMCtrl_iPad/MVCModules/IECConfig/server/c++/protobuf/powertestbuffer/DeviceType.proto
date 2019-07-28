@@ -1,0 +1,81 @@
+syntax="proto3";
+
+package DeviceTypeSetting;
+
+import "DeviceSetting.proto";
+import "PacketSetting.proto";
+import "VarDefine.proto";
+import "ReportDefine.proto";
+import "QuickCheckCommon.proto";
+import "StateSequence.proto";
+
+enum ModuleClass
+{
+    BASE_CATALOG    = 0;  // 基本测试
+    SPEC_CATALOG    = 1;  // 专项测试
+    EXTEND_CATALOG  = 2;  // 扩展测试
+    CUSTOM_CATALOG  = 3;  // 定制测试
+    PACKET_CATALOG  = 4;  // 报文测试
+    ADVANCE_CATALOG = 5;  // 高级测试
+    NO_CATALOG      = 6;  // 不分类测试
+
+}
+
+enum  ModuleType
+{
+    QUICK_CHECK       = 0;  // 通用试验
+    STATE_SEQUENCE    = 1;  // 状态序列
+}
+
+message ModuleContent
+{
+    ReportDefine.ReportStruct       report     = 1;
+    VarDefine.ModuleVar             Var        = 2;
+    ModuleClass                     catalog    = 3;
+    ModuleType                      Type       = 4;
+    QuickCheckCommon.QuickCheckTest Quick      = 5;         // 以下各项哪项存在，取决于Type字段
+    StateSequence.StateSeqInfo      StateSeq   = 6;
+}
+
+// 一个功能模块，以及功能模块内的选择项
+message ModuleItem
+{
+    string                        Name       = 1;
+    bool                          Selected   = 2;    
+    ModuleContent                 Content    = 3;
+}
+
+message TemplateItem
+{
+    bool              Visible    = 1;    // can be modify by administrator
+    ModuleContent     Content    = 2;
+}
+
+message ModuleInfo
+{
+    repeated ModuleItem       item    = 1;    // duplicate is allow
+}
+
+message TemplateList
+{
+   repeated TemplateItem      item    = 1;    // must be unique, duplicate is not allow
+}
+
+message DeviceTypeItem
+{
+    string                     DeviceType           = 1;
+    DeviceSetting.VectStruct   Schema               = 2; 
+    TemplateList               template             = 3;  
+}
+
+message DeviceTypeList
+{
+    repeated DeviceTypeItem Items = 1;
+}
+
+message DevType
+{
+    string                    curType          = 1;
+    DeviceTypeList            DevTypeList      = 2;
+    PacketSetting.PacketsInfo Packet           = 3;
+}

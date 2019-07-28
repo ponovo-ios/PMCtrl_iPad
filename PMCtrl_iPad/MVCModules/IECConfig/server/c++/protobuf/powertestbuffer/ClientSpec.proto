@@ -1,0 +1,22 @@
+syntax="proto3";
+
+package ClientSpec;
+
+message NotifyRequest 
+{
+  string product = 1;
+  string module  = 2;
+  string catalog = 3;
+  string param   = 4;
+}
+
+message NotifyResponse 
+{
+  int32 ResultCode = 1;
+}
+
+service ServerHost 
+{
+  rpc Notify(NotifyRequest) returns (NotifyResponse);
+}
+

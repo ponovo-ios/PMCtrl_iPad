@@ -1,0 +1,61 @@
+﻿syntax="proto3";
+
+import "OutPutCommon.proto";
+import "hqyGoosePublish.proto";
+package StatePara;
+
+message CommonPara
+{
+	uint32 nJudgeCondition =1; //开入翻转参考状态 0：第一个状态 1：上一个状态
+	uint32 nDCOFFSET =2;  //是否叠加直流分量 0：否 1：是
+	float fTou =3;  //衰减时间常数
+	uint32 nLoopNum =4; //循环次数
+}
+message GradientPara
+{
+			
+       bool bdfdt =1;         //是否df/dt
+       bool bdvdt =2;         //是否dv/dt
+       bool bComGradient =3;  //普通递变
+       OutPutCommon.para_type iVar=4;
+       float fdfdt =5;        //df/dt值
+       float fdvdt =6;        //dv/dt值
+       float fStartV =7;      //起始电压
+       float fStartHz = 8;
+       float fEndHz =9;       //终值频率
+       float fEndV =10;       //终值电压
+       float fTrigerV =11;    //触发电压
+       float fStep =12;         //变化步长
+       float fStepTime =13;     //步长时间
+       float fEnd =14;          //变化终值
+       float fStart = 15;       //普通递变始值
+   
+}
+message state
+{
+         uint32 nIndex = 1;
+         bool bDc =2; //是否直流
+         uint32 nTrigerType = 3;//0: 手动触发 1:时间触发单位ms 2:开入变位触发 3:GPS触发 4:开关量或时间触发 5:低电压触发
+         float fOutPutTime =4; //输出时间
+         uint32 sGpstime = 5;  //GPS时间的组成部分1，表示自1970年1月1日起至当前GPS时间的秒数
+         uint32 nsGpsTime = 6; //GPS时间的组成部分2，表示当前GPS时间秒数以下部分的表示的纳秒数，组成部分1和组成部分2进行结合，表示精确的gps时间：YYYY-MM-DD, HH:mm-SS:ns
+         float fTrigerHoldTime= 7;  //触发后保持时间	
+         uint32 nBiValide = 8;      //开入有效位
+         uint32 nBiLogic = 9;    //开入逻辑：0：逻辑或 1：逻辑与
+         uint32 nBoValide = 10;     //开出有效位
+         bool bBoInvert =11;        //是否开出状态翻转
+         float fBoHoldTime  =12;    //开出状态翻转保持时间
+         OutPutCommon.acanalogpara oacAnalogpara = 13;
+         OutPutCommon.acanalogpara oacDigitalpara = 14;
+         GradientPara oanaGradientpara =15;   //模拟递变参数
+         GradientPara odigGradientpara =16;   //数字递变参数
+         uint32 nBiDigitalValide = 17; //数字开入变位有效位
+         hqyGoose_Pub_Setting.Goose_Publish GooseChanged = 18; //Goose
+}
+
+message states
+{
+		CommonPara ocommon =1;
+    repeated state ostates = 2;
+}
+

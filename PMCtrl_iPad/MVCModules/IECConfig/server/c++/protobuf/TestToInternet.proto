@@ -1,0 +1,35 @@
+﻿syntax="proto3";
+
+package Testtointernet;
+
+
+enum para_type
+{
+	testOff = 0;//测试未开始
+	manual_type = 1;//手动实验
+	state_type = 2;//状态序列
+        differ_type = 3;//差动实验
+	distance_type = 4;//距离实验
+  //等以后有新实验类型再行添加
+}
+
+message chanelpara
+{
+	 float famptitude = 1;//幅值
+	 float fphase = 2;//相位
+	 float ffre = 3;//频率
+}
+message temperature 
+{
+	 float value=1;
+}
+message item
+{
+	 para_type testtype = 1; //测试类型
+   	 repeated chanelpara analogcurrentchanelvalue = 2;//电流通道 
+	 repeated chanelpara analogvoltchangelvalue = 3;//电压道值
+	 repeated temperature temperaturevalue = 4;//温度 
+	 uint32 ibinstate = 5;//开入量
+	 uint32 nTimepart1=6;//GPS时间，秒数
+	 uint32 nTimepart2=7;//GPS时间，纳秒
+}

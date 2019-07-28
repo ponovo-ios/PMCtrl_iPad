@@ -1,0 +1,24 @@
+syntax="proto3";
+import "OutPutCommon.proto";
+package Harm;
+
+message HarmAnalog
+{
+    repeated OutPutCommon.acanalogpara oacanlogpara =1;
+    repeated OutPutCommon.acanalogpara oacdigitalpara =2;
+    OutPutCommon.GradientPara oGradientPara = 3;
+    OutPutCommon.GradientPara oDigitalGradientPara = 4;
+    uint32 iOutPut =5;  //开出量
+    DCPara oAnalogDC = 6;
+    DCPara oDigitalDC = 7;
+    bool bisAuto = 8;
+    uint32 iInPut = 9;   //开入量       
+	  uint32 iLogic = 10;  //开入逻辑 //0: 逻辑或  1：逻辑与
+	  bool bLock=11; //是否锁定
+}
+
+message DCPara
+{
+    repeated float analogvolt  = 1; // volt dc
+    repeated float analogCurrent  = 2; // current dc;
+}

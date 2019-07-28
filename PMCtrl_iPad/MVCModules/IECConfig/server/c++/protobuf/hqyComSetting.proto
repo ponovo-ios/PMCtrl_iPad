@@ -1,0 +1,10 @@
+syntax="proto3";
+
+package hqyComPackage;
+
+
+message ComSetting
+{
+     string strIP = 1;
+     uint32 nPort = 2;
+}
